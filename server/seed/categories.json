@@ -1,0 +1,42 @@
+[
+  {
+    "slug": "economie-sociala",
+    "label": "Economie Socială",
+    "description": "Direcții noi de dezvoltare și abordare a economiei sociale. Vom propune spre atenția dumneavoastră, noi ”povești de succes” ale antreprenoriatului social."
+  },
+  {
+    "slug": "noutati",
+    "label": "Noutăți",
+    "description": "Articolele incluse în această categorie cuprind informații generale despre Platforma eMIP și sunt adresate membrilor și părților interesate."
+  },
+  {
+    "slug": "digitalizare",
+    "label": "Transformarea digitală",
+    "description": "În cadrul acestei categorii vă prezentăm modalitățile prin care Platforma MIP identifică oportunitățile de digitalizare și automatizare a proceselor derulate pe parcursul implementării proiectelor și a planurilor de afaceri finanțate de acestea"
+  },
+  {
+    "slug": "arhivare",
+    "label": "Arhivare",
+    "description": "Articolele publicate în această categorie prezintă provocările domeniului arhivării electronice și digitale."
+  },
+  {
+    "slug": "parteneriate",
+    "label": "Parteneriate",
+    "description": "Postările din această categorie urmăresc dezvoltarea parteneriatelor în care este angrenată echipa MIP, în vederea promovării și implementării proiectelor cu obiective de dezvoltare durabilă."
+  },
+  {
+    "slug": "management-de-proiect",
+    "label": "Managementul Proiectelor",
+    "description": "Articolele publicate în această categorie cuprind mesaje și informații ce vizează dezvoltarea cunoștințelor din domeniul gestionării proiectelor și se adresează atât membrilor platformei eMIP, cât și vizitatorilor."
+  },
+  {
+    "slug": "instrumente-mip",
+    "label": "Instrumente MIP",
+    "description": "În această categorie vă vom prezenta noile instrumente dezvoltate de echipa Dev-Ops MIP"
+  },
+  {
+    "slug": "securitate-si-digitalizare",
+    "label": "Securitate & Digitalizare",
+    "description": "Prezentăm în această categorie provocările organizațiilor privind digitalizarea proceselor și propuneri de gestionare a acestora."
+  }
+]

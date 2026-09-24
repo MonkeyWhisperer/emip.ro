@@ -1,0 +1,120 @@
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
+@theme {
+  --font-sans: "Plus Jakarta Sans Variable", ui-sans-serif, system-ui, sans-serif;
+
+  /* Deep navy, taken from the hero illustration */
+  --color-navy-50: #eef4fb;
+  --color-navy-100: #d6e4f5;
+  --color-navy-200: #aec8ea;
+  --color-navy-600: #1d4f8f;
+  --color-navy-700: #173f73;
+  --color-navy-800: #0f2d56;
+  --color-navy-900: #0a1f3c;
+  --color-navy-950: #061426;
+
+  /* Mint green, taken from the eMIP logo */
+  --color-brand-50: #ecfdf4;
+  --color-brand-100: #d1fae4;
+  --color-brand-200: #a7f3cb;
+  --color-brand-300: #86efbd;
+  --color-brand-400: #6ee7a8;
+  --color-brand-500: #34d399;
+  --color-brand-600: #10b77f;
+  --color-brand-700: #047857;
+  --color-brand-800: #065f46;
+
+  --animate-fade-up: fade-up 0.6s ease-out both;
+
+  @keyframes fade-up {
+    from {
+      opacity: 0;
+      transform: translateY(12px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    /* Keep anchored sections clear of the sticky header */
+    scroll-padding-top: 5rem;
+  }
+
+  body {
+    @apply bg-white font-sans text-slate-700 antialiased;
+  }
+
+  /* Admin: always reserve the scrollbar's width, so content doesn't shift sideways between
+     short and long screens (Windows scrollbars take ~17px). The reserved strip gets the
+     admin background instead of white. */
+  html:has(#admin-main) {
+    scrollbar-gutter: stable;
+    @apply bg-slate-100;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply text-balance text-navy-950;
+  }
+
+  /* Tailwind v4 no longer gives buttons a pointer cursor; restore it for everything clickable
+     (the chat launcher and panel, tabs, toggles, forms, FAQ/collapsible headers). */
+  button:not(:disabled),
+  [role="button"]:not([aria-disabled="true"]),
+  summary {
+    cursor: pointer;
+  }
+
+  /* Keyboard focus ring: dark green on light backgrounds (brand-500 was under 3:1 on white),
+     mint on the navy areas (site header and footer, page and post headers, dark sections and
+     cards, the chat header). The colour is inherited, so the nearest background wins; focusable
+     elements don't set it for themselves because their ring is drawn outside them. */
+  :root {
+    --focus-ring: var(--color-brand-700);
+  }
+
+  :where(.bg-navy-950, .bg-navy-900, .bg-navy-800, .from-navy-800, .bg-navy-950\/90):not(a, button, input, select, textarea, summary, [tabindex]) {
+    --focus-ring: var(--color-brand-400);
+  }
+
+  :where(.bg-white, .bg-slate-50, .bg-slate-100):not(a, button, input, select, textarea, summary, [tabindex]) {
+    --focus-ring: var(--color-brand-700);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--focus-ring);
+    outline-offset: 2px;
+  }
+}
+
+/* Horizontal scroll hint (wide Markdown tables): a soft shadow on each edge that still hides
+   content. The white covers scroll with the content and hide a shadow once its edge is reached. */
+@utility scroll-shadows-x {
+  background:
+    linear-gradient(to right, var(--color-white) 30%, rgb(255 255 255 / 0)) left center / 40px 100% no-repeat local,
+    linear-gradient(to left, var(--color-white) 30%, rgb(255 255 255 / 0)) right center / 40px 100% no-repeat local,
+    radial-gradient(farthest-side at 0 50%, rgb(6 20 38 / 0.16), rgb(6 20 38 / 0)) left center / 14px 100% no-repeat scroll,
+    radial-gradient(farthest-side at 100% 50%, rgb(6 20 38 / 0.16), rgb(6 20 38 / 0)) right center / 14px 100% no-repeat scroll,
+    var(--color-white);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

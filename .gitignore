@@ -1,0 +1,11 @@
+node_modules
+dist
+*.local
+.env
+.env.*
+!.env.example
+.DS_Store
+# SQLite database + uploaded media (runtime data, back it up separately)
+data/
+# Generated at build time (site text for the AI assistant)
+server/generated/
