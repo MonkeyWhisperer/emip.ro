@@ -43,9 +43,11 @@ type Cta = { label: string; href: string };
 export type HeroStat = { value: number; prefix?: string; suffix?: string; label: string; countUp?: false };
 
 export const hero = {
-  eyebrow: "Ecosistem de soluții de digitalizare a afacerii",
-  title: "Platforma #1 pentru implementarea proiectelor PEO & PIDS",
-  subtitle: "Proiecte cu finanțare, livrate la timp și în limitele bugetului",
+  eyebrow: "Actualizat pentru ghidurile PEO & PIDS 2021–2027",
+  // Read as one sentence. From md the hero sets it on three lines: `lead` / `accent` (highlighted)
+  // + `tail[0]` / `tail[1]`.
+  title: { lead: "Proiecte cu finanțare,", accent: "livrate la timp", tail: ["și în", "limitele bugetului"] },
+  subtitle: "Zero corecții financiare pe proiectele PEO & PIDS",
   text: "Asigurați conformitatea MIPE și automatizați 90% din munca de raportare. Gestionați proiecte, echipe și bugete dintr-o singură platformă.",
   primary: { label: "Accesează cont demo", href: APP_URL } satisfies Cta,
   primaryNote: "Cu proiecte demo virtualizate.",
@@ -53,7 +55,7 @@ export const hero = {
   // The numbers count up from 0 when the bar scrolls into view; a year (`countUp: false`) doesn't.
   stats: [
     { value: 300, suffix: "+", label: "Proiecte finalizate" },
-    { value: 2018, prefix: "Din ", label: "Operaționali în digitalizarea proiectelor", countUp: false },
+    { value: 2018, prefix: "Din ", label: "Alături de beneficiari", countUp: false },
     { value: 90, suffix: "%", label: "Reducere timp raportare" },
     { value: 10, suffix: "x", label: "Mai multe proiecte în paralel" },
     { value: 100, suffix: "%", label: "Conformitate MIPE" },

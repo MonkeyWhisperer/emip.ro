@@ -39,19 +39,25 @@ export function Hero() {
         fetchPriority="high"
         className="absolute inset-0 -z-20 size-full object-cover object-[70%_center]"
       />
-      <div className="absolute inset-0 -z-10 bg-gradient-to-r from-navy-950 via-navy-950/90 to-navy-950/40 max-lg:via-navy-950/85 max-lg:to-navy-950/75" />
+      {/* The image is dark on the left, where the text sits. From xl the network has room beside the
+          text and is only lightly dimmed; on narrower screens it runs behind the text, so more. */}
+      <div className="absolute inset-0 -z-10 bg-gradient-to-r from-navy-950 via-navy-950/60 via-45% to-transparent max-xl:via-navy-950/85 max-xl:to-navy-950/60 max-lg:to-navy-950/75" />
 
       <Container className="pb-16 pt-20 sm:pt-28 lg:pb-20">
-        <div className="max-w-2xl animate-fade-up">
+        {/* max-w-4xl for the heading ("livrate la timp și în" on one line at 60px); the text stays max-w-2xl. */}
+        <div className="max-w-4xl animate-fade-up">
           <p className="inline-flex items-center gap-2 rounded-full border border-brand-400/30 bg-brand-400/10 px-3 py-1 text-xs font-semibold text-brand-300">
             <span className="size-1.5 rounded-full bg-brand-400" aria-hidden />
             {hero.eyebrow}
           </p>
-          <h1 className="mt-6 text-4xl font-extrabold leading-tight tracking-tight text-white sm:text-5xl lg:text-6xl">
-            {hero.title}
+          {/* The spaces keep the parts apart in the page's text (search engines, the AI export). */}
+          <h1 className="mt-6 text-4xl font-extrabold leading-tight tracking-wider text-white sm:text-5xl lg:text-6xl">
+            <span className="block">{hero.title.lead}</span>{" "}
+            <span className="text-brand-400">{hero.title.accent}</span> {hero.title.tail[0]}
+            <br className="max-md:hidden" /> {hero.title.tail[1]}
           </h1>
-          <p className="mt-6 text-xl font-semibold text-brand-300">{hero.subtitle}</p>
-          <p className="mt-4 text-lg leading-relaxed text-slate-200">{hero.text}</p>
+          <p className="mt-6 max-w-2xl text-xl font-semibold text-brand-300">{hero.subtitle}</p>
+          <p className="mt-4 max-w-2xl text-lg leading-relaxed text-slate-200">{hero.text}</p>
           <div className="mt-10 flex flex-col gap-3 sm:flex-row sm:items-start">
             {/* The note belongs to the demo button, so it sits directly under it. */}
             <div className="flex flex-col gap-2">

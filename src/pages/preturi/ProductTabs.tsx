@@ -8,7 +8,7 @@ function PriceCard({ icon: Icon, title, price, text, note, stores }: PriceItem) 
   return (
     <article className="flex flex-col rounded-2xl border border-slate-200 bg-white p-6 transition-shadow hover:shadow-lg hover:shadow-navy-900/5">
       <div className="flex items-start justify-between gap-4">
-        <div className="flex size-11 items-center justify-center rounded-xl bg-brand-50 text-brand-700">
+        <div className="flex size-11 items-center justify-center rounded-xl bg-navy-900 text-brand-400">
           <Icon aria-hidden className="size-5" />
         </div>
         {price.free && (

@@ -1,7 +1,7 @@
 import path from "node:path";
 import { serve } from "@hono/node-server";
 import { scheduleLogPurge } from "./ai/chat.ts";
-import { scheduleSiteSync } from "./ai/knowledge.ts";
+import { openai, scheduleSiteSync } from "./ai/knowledge.ts";
 import { createApp } from "./app.ts";
 import { assertAuthConfigured, revokeSessionsIfCredentialsChanged, trustedProxies } from "./auth.ts";
 import { seedIfNeeded } from "./seed.ts";
@@ -29,6 +29,8 @@ seedIfNeeded();
 scheduleLogPurge();
 // Refresh the AI assistant's knowledge after each deploy; unchanged documents are skipped.
 if (!dev) scheduleSiteSync(10_000);
+// Without the key the site simply doesn't show the chat button; say why in the deploy log.
+if (!openai) console.warn("[ai] OPENAI_API_KEY is not set: the AI assistant is disabled and its button is hidden.");
 
 const app = createApp({ dev, distDir: path.resolve("dist") });
 serve({ fetch: app.fetch, port, hostname }, (info) => {

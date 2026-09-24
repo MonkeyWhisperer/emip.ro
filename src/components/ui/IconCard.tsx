@@ -26,7 +26,7 @@ export function IconCard({ icon: Icon, title, text, dark = false, layout = "stac
   const iconTile = (
     <div
       className={`flex size-11 shrink-0 items-center justify-center rounded-xl ${
-        dark ? "bg-brand-400/15 text-brand-300" : "bg-brand-50 text-brand-700"
+        dark ? "bg-brand-400/15 text-brand-300" : "bg-navy-900 text-brand-400"
       }`}
     >
       <Icon aria-hidden className="size-5" />

@@ -10,7 +10,7 @@ export function PlaceholderPage({ notFound = false }: { notFound?: boolean }) {
     <Container className="flex flex-col items-center py-32 text-center">
       <PageMeta title={notFound ? "Pagina nu a fost găsită" : "Pagina este în lucru"} />
       <meta name="robots" content="noindex" />
-      <div className="flex size-14 items-center justify-center rounded-2xl bg-brand-50 text-brand-700">
+      <div className="flex size-14 items-center justify-center rounded-2xl bg-navy-900 text-brand-400">
         <Icon aria-hidden className="size-7" />
       </div>
       <h1 className="mt-6 text-4xl font-extrabold tracking-tight sm:text-5xl">

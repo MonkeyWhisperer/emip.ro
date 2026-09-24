@@ -27,7 +27,7 @@ export function FundedProjects() {
             {fundedProjects.reasons.map(({ icon: Icon, title, text }) => (
               <li key={title}>
                 <div className="flex items-center gap-4">
-                  <div className="flex size-10 shrink-0 items-center justify-center rounded-lg bg-brand-100 text-brand-800">
+                  <div className="flex size-11 shrink-0 items-center justify-center rounded-xl bg-navy-900 text-brand-400">
                     <Icon aria-hidden className="size-5" />
                   </div>
                   <h4 className="font-semibold">{title}</h4>

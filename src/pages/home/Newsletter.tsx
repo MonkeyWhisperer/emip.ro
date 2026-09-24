@@ -36,7 +36,7 @@ export function Newsletter() {
     <section className="border-t border-slate-200 bg-white py-16">
       <Container className="grid items-center gap-8 lg:grid-cols-2">
         <div className="flex gap-4">
-          <div className="flex size-12 shrink-0 items-center justify-center rounded-xl bg-brand-50 text-brand-700">
+          <div className="flex size-12 shrink-0 items-center justify-center rounded-xl bg-navy-900 text-brand-400">
             <Mail aria-hidden className="size-6" />
           </div>
           <div>
