@@ -46,7 +46,7 @@ export function FunctionalitatiPage() {
       </PageHeader>
 
       {features.map((feature, i) => (
-        <FeatureRow key={feature.id} feature={feature} index={i} total={features.length} />
+        <FeatureRow key={feature.id} feature={feature} index={i} />
       ))}
 
       <ClosingCta />

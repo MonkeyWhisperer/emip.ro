@@ -4,33 +4,44 @@ import {
   BotMessageSquare,
   Calculator,
   CalendarDays,
+  ChartGantt,
   ChartLine,
   ClipboardCheck,
   Clock,
+  CloudUpload,
+  Coins,
+  Eye,
   FileChartColumn,
   FileClock,
+  FileDown,
+  FileSpreadsheet,
   FileText,
+  FolderArchive,
   FolderKanban,
+  FolderTree,
   Funnel,
+  Gauge,
   Handshake,
   Highlighter,
+  History,
   KeyRound,
+  Layers,
   LayoutDashboard,
   Library,
+  MailCheck,
+  Milestone,
+  PackageCheck,
   ScanText,
   Search,
+  SlidersHorizontal,
   Target,
+  TrendingUp,
   UserCheck,
   UserCog,
   Users,
   Wallet,
 } from "lucide-react";
 import { APP_URL } from "./site";
-// The live page illustrates this feature with the same picture as the home hero.
-import proiecteImage from "../assets/hero.webp";
-import raportareImage from "../assets/functionalitati/raportare-automata.webp";
-import librarieImage from "../assets/functionalitati/librarie-documente.webp";
-import rezultateImage from "../assets/functionalitati/rezultate-kpi.webp";
 
 type Cta = { label: string; href: string };
 
@@ -41,13 +52,11 @@ export type Feature = {
   title: string;
   text: string;
   items: string[];
-  /** Illustration from the live page. */
-  image?: { src: string; alt: string };
   /**
-   * Features whose live illustration is a Wix stock photo get a decorative icon panel instead:
-   * the feature icon, circled by four small icons echoing its checklist.
+   * The illustration is a decorative icon panel (the live page's stock photos said little about
+   * the features): the feature icon, circled by four small icons echoing its checklist.
    */
-  orbit?: [LucideIcon, LucideIcon, LucideIcon, LucideIcon];
+  orbit: [LucideIcon, LucideIcon, LucideIcon, LucideIcon];
 };
 
 // SEO description from the live page.
@@ -79,10 +88,7 @@ export const features: Feature[] = [
       "Vizualizări multiple: Listă, Gantt Chart, Kanban, Calendar",
       "Monitorizare progres în timp real cu procente și status-uri",
     ],
-    image: {
-      src: proiecteImage,
-      alt: "Ilustrație: o echipă analizează grafice și stadiul proiectelor pe un perete de ecrane",
-    },
+    orbit: [Milestone, ChartGantt, Coins, Gauge],
   },
   {
     id: "raportare-automata",
@@ -96,10 +102,7 @@ export const features: Feature[] = [
       "Personalizare perioadă raportare, filtre și secțiuni",
       "Generare automată și trimitere email la finalizare generare arhivă (procese ample)",
     ],
-    image: {
-      src: raportareImage,
-      alt: "Ilustrație: documente, rapoarte și notificări conectate la un nucleu de automatizare",
-    },
+    orbit: [FileSpreadsheet, FileDown, SlidersHorizontal, MailCheck],
   },
   {
     id: "librarie-documente",
@@ -113,10 +116,7 @@ export const features: Feature[] = [
       "Căutare full-text în conținut documente",
       "Preview documente fără download",
     ],
-    image: {
-      src: librarieImage,
-      alt: "Ilustrație: rețea de date conectată la cloud",
-    },
+    orbit: [FolderTree, CloudUpload, History, Eye],
   },
   {
     id: "plan-de-afaceri",
@@ -173,10 +173,7 @@ export const features: Feature[] = [
       "Gestionare arhivă documente proiect cu descărcare structurată conform cerințelor MySMIS",
       "Generare stive concatenate și opisate automat, grupate pe experți, parteneri și luni calendaristice",
     ],
-    image: {
-      src: rezultateImage,
-      alt: "Ilustrație abstractă: rețea de noduri și conexiuni luminoase",
-    },
+    orbit: [TrendingUp, PackageCheck, FolderArchive, Layers],
   },
   {
     id: "colaborare-echipa",

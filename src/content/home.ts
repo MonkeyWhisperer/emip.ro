@@ -197,8 +197,11 @@ export const arch = {
     "Certificat propriu pentru semnătură electronică",
     "Disponibil pe App Store și Google Play",
   ],
-  primary: { label: "Descoperă eMIP Arch", href: APP_URL } satisfies Cta,
-  secondary: { label: "Solicită Demo", href: "/contact" } satisfies Cta,
+  // The product tab on /preturi; the demo button covers the app (its login page lists the
+  // eMIP Arch demo accounts: Admin Arhivă, Client).
+  primary: { label: "Descoperă eMIP Arch", href: "/preturi#arch" } satisfies Cta,
+  secondary: { label: "Accesează cont demo", href: APP_URL } satisfies Cta,
+  secondaryNote: "Cu arhive demo virtualizate.",
   items: [
     {
       icon: Archive,

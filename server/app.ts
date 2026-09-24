@@ -8,12 +8,16 @@ import { secureHeaders } from "hono/secure-headers";
 import { serveStatic } from "@hono/node-server/serve-static";
 import {
   attemptLogin,
+  clientIp,
   clientKey,
   createSession,
   destroySession,
   hasValidSession,
+  requestHost,
   requireAdmin,
   sameOrigin,
+  socketAddress,
+  trustedProxies,
   warnUntrustedProxy,
 } from "./auth.ts";
 import {
@@ -35,7 +39,7 @@ import { chatRoutes } from "./ai/chat.ts";
 import { scheduleSiteSync } from "./ai/knowledge.ts";
 import { adminAi } from "./ai/routes.ts";
 import { adminForms, publicForms } from "./forms.ts";
-import { legacyTarget, matchRoute, serverMetaTags, sitemapXml } from "./siteRoutes.ts";
+import { SITE_URL, legacyTarget, matchRoute, serverMetaTags, sitemapXml } from "./siteRoutes.ts";
 import { MAX_UPLOAD_BYTES, saveUpload, uploadMime } from "./uploads.ts";
 import { ValidationError, objectBody, parseCategoryInput, parsePostInput } from "./validate.ts";
 
@@ -109,6 +113,19 @@ export function createApp({ dev, distDir }: { dev: boolean; distDir: string }) {
 
   app.use("*", secureHeaders({ crossOriginEmbedderPolicy: false, crossOriginResourcePolicy: "same-origin" }));
   app.use("*", warnUntrustedProxy);
+
+  // The bare domain (emip.ro) redirects to the canonical www host from SITE_URL, so the site isn't
+  // served and indexed twice when both domains point here. Other hosts (the platform's own domain,
+  // its health checks, localhost) are served as they are.
+  const canonicalHost = new URL(SITE_URL).host;
+  const bareHost = canonicalHost.startsWith("www.") ? canonicalHost.slice(4) : undefined;
+  app.use("*", async (c, next) => {
+    if (bareHost && (c.req.method === "GET" || c.req.method === "HEAD") && requestHost(c) === bareHost) {
+      const { pathname, search } = new URL(c.req.url);
+      return c.redirect(`${SITE_URL}${pathname}${search}`, 301);
+    }
+    await next();
+  });
 
   app.onError((err, c) => {
     if (err instanceof ValidationError) return c.json({ error: err.message, fields: err.fields }, 400);
@@ -255,6 +272,30 @@ export function createApp({ dev, distDir }: { dev: boolean; distDir: string }) {
   api.route("/chat", chatRoutes);
   api.route("/forms", publicForms);
   api.route("/admin", admin);
+
+  // For the host's health check (Railway: deploy.healthcheckPath): answers only once the
+  // database on the data volume can be read.
+  api.get("/health", (c) => {
+    db.prepare("SELECT 1").get();
+    c.header("Cache-Control", "no-store");
+    return c.json({ ok: true });
+  });
+
+  // Temporary check for the TRUST_PROXY value after a deploy (README, "Client IPs on Railway"):
+  // with DEBUG_CLIENT_IP=1, shows the caller's own proxy headers and the IP the limits would use.
+  if (process.env.DEBUG_CLIENT_IP === "1") {
+    api.get("/debug/client-ip", (c) => {
+      c.header("Cache-Control", "no-store");
+      return c.json({
+        trustProxy: trustedProxies(),
+        clientIp: clientIp(c),
+        xForwardedFor: c.req.header("x-forwarded-for") ?? null,
+        xRealIp: c.req.header("x-real-ip") ?? null,
+        fastlyClientIp: c.req.header("fastly-client-ip") ?? null,
+        socketAddress: socketAddress(c) ?? null,
+      });
+    });
+  }
   api.all("*", (c) => c.json({ error: "Endpoint inexistent." }, 404));
   app.route("/api", api);
 

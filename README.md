@@ -131,7 +131,9 @@ redirect (`src/router.tsx`). Old English pages go to their Romanian equivalent w
 
 ## Deployment
 
-The site needs a Node host (a VPS, or a PaaS such as Render, Railway or Fly.io); static hosting is no longer enough.
+The site needs a Node host (a VPS, or a PaaS such as Railway, Render or Fly.io); static hosting (Vercel,
+Netlify, GitHub Pages) is no longer enough: the blog, forms, AI assistant and admin panel need the server and its
+data folder. For Railway, see [Railway](#railway) below.
 
 ```sh
 npm ci
@@ -163,3 +165,46 @@ client IP is then read from `X-Forwarded-For`, counting from the right. Two ways
    the port is reachable only through the proxy.
 
 Without `TRUST_PROXY` (no proxy), the server listens on `0.0.0.0` unless `HOST` says otherwise.
+
+### Railway
+
+The repository deploys to Railway as it is. `railway.json` selects Railpack, which installs the dependencies, runs
+`npm run build`, starts `npm start` with Node 24 (from `engines`), and waits for `/api/health` to answer before
+switching traffic to a new deploy.
+
+1. **New project → Deploy from GitHub repo** → `MonkeyWhisperer/emip.ro`, branch `main`.
+2. **Volume:** add a volume to the service with mount path `/data`. A service with a volume runs as a single
+   replica, and each redeploy has a few seconds of downtime (the old container stops before the new one mounts it).
+3. **Variables** (service → Variables):
+
+   | Variable | Value |
+   |---|---|
+   | `HOST` | `0.0.0.0`. Required: with `TRUST_PROXY` set, the server would otherwise listen on 127.0.0.1 only and Railway could not reach it. |
+   | `DATA_DIR` | `/data` (the volume) |
+   | `TRUST_PROXY` | `2` to start with; confirm it as described under "Client IPs on Railway" below |
+   | `ADMIN_EMAIL`, `ADMIN_PASSWORD_HASH`, `OPENAI_API_KEY` | from `.env`. Paste the password hash without the quotes around it in `.env`. |
+   | `SITE_URL` | `https://www.emip.ro` (also the default) |
+
+   Don't set `NPM_CONFIG_PRODUCTION` or `NPM_CONFIG_OMIT`: the build needs the dev dependencies (Vite, TypeScript).
+4. **Networking → Generate Domain** gives the service a `*.up.railway.app` address to test on. The first start
+   imports the 42 blog posts into the new, empty database.
+5. **Backups:** the volume holds the database and every uploaded file. In the service's Backups tab, enable a
+   daily schedule (if your plan doesn't offer backups, download copies of `/data` regularly).
+6. **Custom domains:** under Networking, add `www.emip.ro` and, if the DNS provider allows it, `emip.ro`. Railway
+   shows a CNAME and a TXT record for each; HTTPS certificates follow automatically once DNS resolves. A CNAME on
+   the bare domain needs a provider with CNAME flattening or ALIAS/ANAME records (e.g. Cloudflare); otherwise
+   redirect `emip.ro` to `www.emip.ro` at the DNS provider. Requests that do reach the server for `emip.ro` are
+   redirected to `https://www.emip.ro` by the server itself.
+
+Railway's Hobby plan is meant for personal projects; for a commercial site Railway recommends the Pro plan.
+
+**Client IPs on Railway.** Public traffic reaches the service through Railway's edge network (Fastly), and
+Railway doesn't document how that builds `X-Forwarded-For`. So confirm `TRUST_PROXY` once after the first deploy:
+
+1. Set `DEBUG_CLIENT_IP=1` (the service redeploys).
+2. Open `https://<domain>/api/debug/client-ip`: `clientIp` must be your own public IP, not an address from the
+   edge network.
+3. Run `curl -H "X-Forwarded-For: 1.2.3.4" https://<domain>/api/debug/client-ip`: `clientIp` must still be your
+   IP, not `1.2.3.4`.
+4. If either check fails, adjust `TRUST_PROXY` (it counts the entries of `xForwardedFor` from the right) and
+   repeat. Then delete `DEBUG_CLIENT_IP`.

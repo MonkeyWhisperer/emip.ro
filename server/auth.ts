@@ -112,15 +112,24 @@ export function clientIp(c: Context): string {
     const ip = chain[chain.length - hops];
     if (ip) return ip;
   }
-  try {
-    return getConnInfo(c).remote.address ?? "unknown";
-  } catch {
-    return "unknown";
-  }
+  return socketAddress(c) ?? "unknown";
 }
 
 /** Key for the per-client rate limits: the client IP, with IPv6 clients grouped per /64. */
 export const clientKey = (c: Context) => rateLimitKey(clientIp(c));
+
+/** The TCP peer's address: the client, or the nearest proxy when there is one. */
+export function socketAddress(c: Context): string | undefined {
+  try {
+    return getConnInfo(c).remote.address;
+  } catch {
+    return undefined;
+  }
+}
+
+/** The host the visitor asked for, lower-case, with the port (if any). */
+export const requestHost = (c: Context) =>
+  ((trustedProxies() > 0 && c.req.header("x-forwarded-host")) || c.req.header("host") || "").toLowerCase();
 
 /** TRUST_PROXY: how many reverse proxies in front of the server append to X-Forwarded-For (0 = none). */
 export function trustedProxies(): number {
@@ -151,7 +160,7 @@ export const warnUntrustedProxy: MiddlewareHandler = async (c, next) => {
 export const sameOrigin: MiddlewareHandler = async (c, next) => {
   if (!["GET", "HEAD", "OPTIONS"].includes(c.req.method)) {
     const origin = c.req.header("origin");
-    const host = (trustedProxies() > 0 && c.req.header("x-forwarded-host")) || c.req.header("host");
+    const host = requestHost(c);
     let originHost: string | undefined;
     try {
       originHost = origin ? new URL(origin).host : undefined;

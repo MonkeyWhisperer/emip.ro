@@ -27,19 +27,24 @@ export function Arch() {
               </li>
             ))}
           </ul>
-          <div className="mt-10 flex flex-col gap-3 sm:flex-row">
+          <div className="mt-10 flex flex-col gap-3 sm:flex-row sm:items-start">
             <ButtonLink href={arch.primary.href} arrow>
               {arch.primary.label}
             </ButtonLink>
-            <ButtonLink href={arch.secondary.href} variant="outline-light">
-              {arch.secondary.label}
-            </ButtonLink>
+            {/* The note belongs to the demo button, so it sits directly under it (as in the hero). */}
+            <div className="flex flex-col gap-2">
+              <ButtonLink href={arch.secondary.href} variant="outline-light">
+                {arch.secondary.label}
+              </ButtonLink>
+              <p className="text-center text-xs text-slate-300">{arch.secondaryNote}</p>
+            </div>
           </div>
         </div>
 
-        <div className="grid gap-5 sm:grid-cols-2">
+        {/* Two columns from md: narrower cards would wrap "Arhivare Electronică Acreditată". */}
+        <div className="grid gap-5 md:grid-cols-2">
           {arch.items.map((item) => (
-            <IconCard key={item.title} {...item} dark />
+            <IconCard key={item.title} {...item} dark layout="inline" />
           ))}
         </div>
       </div>
