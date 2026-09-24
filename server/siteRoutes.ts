@@ -21,9 +21,10 @@ const STATIC_PAGES: { path: string; sitemap?: false; title?: string }[] = [
   { path: "/preturi" },
   { path: "/servicii" },
   { path: "/workshop-09-sept-2026", sitemap: false }, // ended event
-  { path: "/noi" },
+  { path: "/despre-noi" },
   { path: "/contact" },
   { path: "/librarie" },
+  { path: "/certificari" },
   { path: "/termeni-si-conditii-legale" },
   { path: "/politica-de-confidentialitate" },
   { path: "/politica-cookies" },
@@ -160,6 +161,8 @@ export function knownPagePath(page: unknown): string | undefined {
 // ---- legacy URLs ---------------------------------------------------------------------------
 
 const LEGACY: [RegExp, string][] = [
+  // The Wix site's About page; the new site calls it /despre-noi.
+  [/^\/noi\/?$/i, "/despre-noi"],
   [/^\/copy-of-politica-de-confiden(t|ț|%C8%9B)ialitate\/?$/i, "/politica-cookies"],
   [/^\/cookies\/?$/, "/politica-cookies"],
   [/^\/politica-confidentialitate\/?$/, "/politica-de-confidentialitate"],
@@ -171,6 +174,8 @@ const LEGACY: [RegExp, string][] = [
 
 /** Pages of the old English (/en/...) Wix site that have a Romanian equivalent at the same path. */
 const EN_PAGES = new Set(["noi", "contact", "servicii", "librarie", "blog", "search", "functionalitati", "solutii", "preturi"]);
+/** Of those, the ones that moved on the new site (straight there, not through a second redirect). */
+const MOVED: Record<string, string> = { noi: "despre-noi" };
 /** English blog category slugs of the Wix site. */
 const EN_CATEGORIES: Record<string, string> = {
   "social-economy": "economie-sociala",
@@ -186,7 +191,7 @@ export function legacyTarget(p: string): string | undefined {
   const en = p.match(/^\/en(?:\/(.*?))?\/?$/i);
   if (!en) return undefined;
   const rest = (en[1] ?? "").toLowerCase();
-  if (EN_PAGES.has(rest)) return `/${rest}`;
+  if (EN_PAGES.has(rest)) return `/${Object.hasOwn(MOVED, rest) ? MOVED[rest] : rest}`;
   const category = rest.match(/^blog\/categories\/([^/]+)$/)?.[1];
   // Own keys only: "constructor" or "__proto__" must not reach Object.prototype.
   if (category && Object.hasOwn(EN_CATEGORIES, category)) return `/blog/categories/${EN_CATEGORIES[category]}`;

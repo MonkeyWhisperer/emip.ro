@@ -3,7 +3,6 @@ import { Clock, Mail, MapPin, Phone } from "lucide-react";
 import { APP_URL, contact } from "./site";
 import gligorPaul from "../assets/contact/gligor-paul.webp";
 import mertaPaul from "../assets/contact/merta-paul.webp";
-import neagLenuta from "../assets/contact/neag-lenuta.webp";
 import pisecDan from "../assets/contact/pisec-dan.webp";
 import pisecIurai from "../assets/contact/pisec-iurai.webp";
 import pisecMariaIoana from "../assets/contact/pisec-maria-ioana.webp";
@@ -38,14 +37,13 @@ export const contactPage = {
     cta: { label: "Accesează cont demo", href: APP_URL } satisfies Link,
   },
 
-  // The live contact page lists its own phone number and working hours, which differ from
-  // the footer (site.ts). They are kept here as published on the page until the owner
-  // confirms which values are correct; then phone and hours should come from site.ts.
+  // Email and phone come from site.ts (the same as in the footer). The working hours below are
+  // still the live contact page's, which differ from the footer's, until the owner confirms them.
   details: {
     title: "Contact",
     items: [
       { icon: Mail, label: "Email", lines: [contact.email], href: `mailto:${contact.email}` },
-      { icon: Phone, label: "Telefon", lines: ["+40 (0)745 039 592"], href: "tel:+40745039592" },
+      { icon: Phone, label: "Telefon", lines: [contact.phone], href: contact.phoneHref },
       {
         icon: MapPin,
         label: "Adresă",
@@ -66,13 +64,11 @@ export const contactPage = {
 
   team: {
     title: "Echipa eMIP",
-    note: "Răspundem la toate mesajele în maxim 24 de ore lucrătoare.",
     members: [
       { name: "PISEC Maria Ioana", photo: pisecMariaIoana },
       { name: "RUSAN Nicolae Alexandru", photo: rusanNicolaeAlexandru },
       { name: "PISEC Iurai", photo: pisecIurai },
       { name: "PISEC Dan", photo: pisecDan },
-      { name: "NEAG Lenuța", photo: neagLenuta },
       { name: "MERTA Paul", photo: mertaPaul },
       { name: "GLIGOR Paul", photo: gligorPaul },
     ],

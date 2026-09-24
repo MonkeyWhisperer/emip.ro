@@ -1,4 +1,6 @@
 export const APP_URL = "https://pro.emip.ro/";
+/** Shown under every "Accesează cont demo" button (components/ui/DemoButton). */
+export const DEMO_NOTE = "Cu proiecte demo virtualizate.";
 
 export type NavItem = { label: string; href: string };
 
@@ -9,17 +11,18 @@ export const mainNav: NavItem[] = [
   { label: "Prețuri", href: "/preturi" },
   { label: "Servicii", href: "/servicii" },
   { label: "Blog", href: "/blog" },
-  { label: "Despre", href: "/noi" },
+  { label: "Despre noi", href: "/despre-noi" },
   { label: "Contact", href: "/contact" },
 ];
 
 export const footerNav: NavItem[] = [
-  { label: "Despre noi", href: "/noi" },
+  { label: "Despre noi", href: "/despre-noi" },
   { label: "Funcționalități", href: "/functionalitati" },
   { label: "Soluții", href: "/solutii" },
   { label: "Prețuri și Tarife", href: "/preturi" },
   { label: "Servicii", href: "/servicii" },
   { label: "Librărie", href: "/librarie" },
+  { label: "Certificări", href: "/certificari" },
   { label: "Blog", href: "/blog" },
   { label: "Contact", href: "/contact" },
 ];

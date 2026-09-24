@@ -53,6 +53,8 @@ export type AiSource = {
   status: AiSourceStatus;
   error: string | null;
   updatedAt: string;
+  /** Switched off in the admin panel: not in the vector store, so answers never use it. */
+  excluded: boolean;
 };
 
 export type AiStatus = {

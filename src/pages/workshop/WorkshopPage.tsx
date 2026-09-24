@@ -2,6 +2,7 @@ import { CalendarX2 } from "lucide-react";
 import { findService, servicePath } from "../../content/servicii";
 import { workshopPage } from "../../content/workshop";
 import { ButtonLink } from "../../components/ui/ButtonLink";
+import { DemoButton } from "../../components/ui/DemoButton";
 import { PageHeader } from "../../components/ui/PageHeader";
 import { PageMeta } from "../../components/ui/PageMeta";
 import { Section, SectionHeader } from "../../components/ui/Section";
@@ -95,13 +96,13 @@ export function WorkshopPage() {
           <div aria-hidden className="absolute -left-24 -top-32 -z-10 size-80 rounded-full bg-navy-600/40 blur-3xl" />
           <h2 className="mx-auto max-w-2xl text-3xl font-bold tracking-tight text-white sm:text-4xl">{finalCta.title}</h2>
           <p className="mx-auto mt-4 max-w-2xl text-lg text-slate-200">{finalCta.text}</p>
-          <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
+          <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row sm:items-start">
             <ButtonLink href={finalCta.primary.href} arrow>
               {finalCta.primary.label}
             </ButtonLink>
-            <ButtonLink href={finalCta.secondary.href} variant="outline-light">
+            <DemoButton href={finalCta.secondary.href} variant="outline-light">
               {finalCta.secondary.label}
-            </ButtonLink>
+            </DemoButton>
           </div>
         </div>
       </Section>

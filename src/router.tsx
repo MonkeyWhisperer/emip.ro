@@ -22,6 +22,8 @@ const blogIndex = page(() => import("./pages/blog/BlogIndexPage"), "BlogIndexPag
 // server/siteRoutes.ts, keep in sync): pages that exist in Romanian go there, English blog
 // categories to their Romanian slugs, everything else to the home page.
 const EN_PAGES = new Set(["noi", "contact", "servicii", "librarie", "blog", "search", "functionalitati", "solutii", "preturi"]);
+/** Of those, the ones that moved on the new site. */
+const MOVED: Record<string, string> = { noi: "despre-noi" };
 const EN_CATEGORIES: Record<string, string> = {
   "social-economy": "economie-sociala",
   digitization: "digitalizare",
@@ -31,7 +33,7 @@ const EN_CATEGORIES: Record<string, string> = {
 
 function englishTarget(rest: string) {
   const path = rest.replace(/\/$/, "").toLowerCase();
-  if (EN_PAGES.has(path)) return `/${path}`;
+  if (EN_PAGES.has(path)) return `/${Object.hasOwn(MOVED, path) ? MOVED[path] : path}`;
   const category = path.match(/^blog\/categories\/([\w-]+)$/)?.[1];
   if (category && Object.hasOwn(EN_CATEGORIES, category)) return `/blog/categories/${EN_CATEGORIES[category]}`;
   return "/";
@@ -50,9 +52,10 @@ const siteRoutes: RouteObject[] = [
   { path: "servicii", lazy: page(() => import("./pages/servicii/ServiciiPage"), "ServiciiPage") },
   { path: "service-page/:slug", lazy: page(() => import("./pages/servicii/ServicePage"), "ServicePage") },
   { path: "workshop-09-sept-2026", lazy: page(() => import("./pages/workshop/WorkshopPage"), "WorkshopPage") },
-  { path: "noi", lazy: page(() => import("./pages/despre/DesprePage"), "DesprePage") },
+  { path: "despre-noi", lazy: page(() => import("./pages/despre/DesprePage"), "DesprePage") },
   { path: "contact", lazy: page(() => import("./pages/contact/ContactPage"), "ContactPage") },
   { path: "librarie", lazy: page(() => import("./pages/librarie/LibrariePage"), "LibrariePage") },
+  { path: "certificari", lazy: page(() => import("./pages/certificari/CertificariPage"), "CertificariPage") },
   { path: "termeni-si-conditii-legale", lazy: page(() => import("./pages/legal/TermeniPage"), "TermeniPage") },
   { path: "politica-de-confidentialitate", lazy: page(() => import("./pages/legal/ConfidentialitatePage"), "ConfidentialitatePage") },
   { path: "politica-cookies", lazy: page(() => import("./pages/legal/CookiesPage"), "CookiesPage") },
@@ -65,6 +68,7 @@ const siteRoutes: RouteObject[] = [
   { path: "post/:slug", lazy: page(() => import("./pages/blog/PostPage"), "PostPage", "postLoader") },
 
   // Legacy Wix URLs
+  { path: "noi", element: <Navigate to="/despre-noi" replace /> },
   { path: "copy-of-politica-de-confidențialitate", element: <Navigate to="/politica-cookies" replace /> },
   { path: "cookies", element: <Navigate to="/politica-cookies" replace /> },
   { path: "politica-confidentialitate", element: <Navigate to="/politica-de-confidentialitate" replace /> },

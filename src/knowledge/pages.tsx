@@ -2,6 +2,7 @@ import type { ComponentType } from "react";
 import { renderToString } from "react-dom/server";
 import { MemoryRouter, Route, Routes } from "react-router";
 import { Footer } from "../components/layout/Footer";
+import { CertificariPage } from "../pages/certificari/CertificariPage";
 import { ContactPage } from "../pages/contact/ContactPage";
 import { DesprePage } from "../pages/despre/DesprePage";
 import { FunctionalitatiPage } from "../pages/functionalitati/FunctionalitatiPage";
@@ -31,9 +32,10 @@ const PAGES: Entry[] = [
   { path: "/servicii", Component: ServiciiPage },
   { path: "/service-page/mentorat-prin-emip-plan-afaceri", pattern: "/service-page/:slug", Component: ServicePage },
   { path: "/service-page/workshop-demo-prezentare", pattern: "/service-page/:slug", Component: ServicePage },
-  { path: "/noi", Component: DesprePage },
+  { path: "/despre-noi", Component: DesprePage },
   { path: "/contact", Component: ContactPage },
   { path: "/librarie", Component: LibrariePage },
+  { path: "/certificari", Component: CertificariPage },
   { path: "/termeni-si-conditii-legale", Component: TermeniPage },
   { path: "/politica-de-confidentialitate", Component: ConfidentialitatePage },
   { path: "/politica-cookies", Component: CookiesPage },

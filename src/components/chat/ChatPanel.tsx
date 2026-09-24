@@ -196,18 +196,15 @@ export function ChatPanel({ config, onClose }: { config: ChatConfig; onClose: ()
       role="dialog"
       aria-modal="false"
       aria-labelledby="chat-title"
-      className="fixed inset-0 z-[60] flex flex-col bg-white shadow-2xl shadow-navy-950/30 animate-fade-up sm:inset-auto sm:bottom-0 sm:right-0 sm:top-[65px] sm:z-40 sm:w-[420px] sm:border-l sm:border-slate-200"
+      className="fixed inset-0 z-[60] flex flex-col bg-white shadow-2xl shadow-navy-950/30 sm:inset-auto sm:bottom-0 sm:right-0 sm:top-[65px] sm:z-40 sm:w-[420px] sm:border-l sm:border-slate-200"
     >
       <header className="flex items-center gap-3 bg-navy-950 px-4 py-3 text-white">
         <span className="flex size-9 items-center justify-center rounded-full bg-brand-400/15">
           <Sparkles aria-hidden className="size-5 text-brand-400" />
         </span>
-        <div className="min-w-0 flex-1">
-          <h2 id="chat-title" className="text-sm font-semibold text-white">
-            Asistent eMIP
-          </h2>
-          <p className="truncate text-xs text-slate-300">Răspunde pe baza informațiilor de pe site</p>
-        </div>
+        <h2 id="chat-title" className="min-w-0 flex-1 text-sm font-semibold text-white">
+          Asistent Inteligent eMIP
+        </h2>
         {messages.length > 0 && (
           <button type="button" onClick={reset} aria-label="Conversație nouă" title="Conversație nouă" className="rounded-full p-2 text-slate-300 hover:bg-white/10 hover:text-white">
             <RotateCcw aria-hidden className="size-4" />

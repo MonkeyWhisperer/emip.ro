@@ -1,5 +1,6 @@
 import { finalCta } from "../../content/solutii";
 import { ButtonLink } from "../../components/ui/ButtonLink";
+import { DemoButton } from "../../components/ui/DemoButton";
 import { Container } from "../../components/ui/Section";
 
 export function SolutiiCta() {
@@ -16,10 +17,10 @@ export function SolutiiCta() {
             {finalCta.title}
           </h2>
           <p className="mx-auto mt-4 max-w-2xl text-lg text-slate-200">{finalCta.text}</p>
-          <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
-            <ButtonLink href={finalCta.primary.href} arrow>
+          <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row sm:items-start">
+            <DemoButton href={finalCta.primary.href} arrow>
               {finalCta.primary.label}
-            </ButtonLink>
+            </DemoButton>
             <ButtonLink href={finalCta.secondary.href} variant="outline-light">
               {finalCta.secondary.label}
             </ButtonLink>

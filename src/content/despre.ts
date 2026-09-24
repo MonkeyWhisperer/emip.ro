@@ -21,7 +21,6 @@ export const intro = {
 };
 
 export const purpose = {
-  imageAlt: "Ilustrație: doi specialiști analizează grafice și indicatori de proiect afișați pe ecrane digitale",
   items: [
     {
       icon: Target,
@@ -97,7 +96,7 @@ export const association = {
     { value: 120, suffix: "+", label: "Licențe gratuite" },
     { value: 150, suffix: "+", label: "Persoane instruite" },
   ],
-  imageAlt: "Ilustrație: patru persoane privesc o rețea digitală de profiluri conectate între ele",
+  imageAlt: "Ilustrație: persoane conectate prin rețeaua eMIP, alături de simboluri pentru instruire și laptop",
 };
 
 export const cta = {

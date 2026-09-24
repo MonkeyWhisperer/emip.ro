@@ -34,7 +34,7 @@ export function Association() {
         aria-hidden
         className="pointer-events-none absolute -left-40 -bottom-40 size-[32rem] rounded-full bg-brand-500/10 blur-3xl"
       />
-      <div className="relative grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
+      <div className="relative grid gap-12 lg:grid-cols-2 lg:gap-16">
         <div>
           <SectionHeader eyebrow={association.eyebrow} title={association.title} text={lead} dark align="left" />
           {rest.map((p) => (
@@ -49,14 +49,18 @@ export function Association() {
           </dl>
         </div>
 
-        <img
-          src={associationImage}
-          alt={association.imageAlt}
-          width={1400}
-          height={781}
-          loading="lazy"
-          className="w-full rounded-3xl ring-1 ring-white/10"
-        />
+        {/* As tall as the text column from lg (the image is out of the flow and cropped to fit), as in
+            the mission and vision section. */}
+        <div className="relative aspect-[4/3] overflow-hidden rounded-3xl ring-1 ring-white/10 lg:aspect-auto">
+          <img
+            src={associationImage}
+            alt={association.imageAlt}
+            width={1600}
+            height={1200}
+            loading="lazy"
+            className="absolute inset-0 size-full object-cover"
+          />
+        </div>
       </div>
     </Section>
   );

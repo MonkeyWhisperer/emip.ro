@@ -5,12 +5,14 @@ type Props = {
   eyebrow?: string;
   title: string;
   text?: string;
-  /** Extra content under the text, e.g. buttons or filter chips. */
+  /** Extra content under the text, in the text's column, e.g. buttons. */
   children?: ReactNode;
+  /** Content under that, across the page's full width, e.g. the blog's category chips. */
+  wide?: ReactNode;
 };
 
 /** Dark banner at the top of every inner page, matching the home hero. */
-export function PageHeader({ eyebrow, title, text, children }: Props) {
+export function PageHeader({ eyebrow, title, text, children, wide }: Props) {
   return (
     <section className="relative isolate overflow-hidden bg-navy-950">
       <div
@@ -27,6 +29,7 @@ export function PageHeader({ eyebrow, title, text, children }: Props) {
           {text && <p className="mt-5 text-lg leading-relaxed text-slate-300">{text}</p>}
           {children && <div className="mt-8">{children}</div>}
         </div>
+        {wide && <div className="mt-8 animate-fade-up">{wide}</div>}
       </Container>
     </section>
   );

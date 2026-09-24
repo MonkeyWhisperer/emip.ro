@@ -1,4 +1,4 @@
-import { CircleAlert, CircleCheck, Clock, LoaderCircle } from "lucide-react";
+import { CircleAlert, CircleCheck, CircleOff, Clock, LoaderCircle } from "lucide-react";
 import type { AiSource, AiSourceStatus, AiStatus } from "../../../../shared/ai";
 import { MAX_TRAINING_LABEL } from "../../../lib/aiAdminApi";
 import { ApiError } from "../../../lib/api";
@@ -94,6 +94,7 @@ const STUCK_PROCESSING_MS = 30 * 60 * 1000;
 
 /** A source left "pending" / "processing" far longer than indexing takes (e.g. after a server restart mid-upload). */
 export function isStuck(source: AiSource, syncRunning: boolean, now = Date.now()) {
+  if (source.excluded) return false; // kept out of the store on purpose ("pending" with no upload)
   const age = now - Date.parse(source.updatedAt);
   if (source.status === "pending") return !syncRunning && age > STUCK_PENDING_MS;
   if (source.status === "processing") return age > STUCK_PROCESSING_MS;
@@ -102,7 +103,7 @@ export function isStuck(source: AiSource, syncRunning: boolean, now = Date.now()
 
 /** Still being indexed (and worth polling for). */
 export const isIndexing = (source: AiSource, syncRunning: boolean) =>
-  (source.status === "pending" || source.status === "processing") && !isStuck(source, syncRunning);
+  !source.excluded && (source.status === "pending" || source.status === "processing") && !isStuck(source, syncRunning);
 
 const badge = {
   pending: {
@@ -131,8 +132,16 @@ const badge = {
   },
 } satisfies Record<AiSourceStatus, unknown>;
 
-export function SourceStatusBadge({ status }: { status: AiSourceStatus }) {
-  const { label, icon: Icon, className, iconClass } = badge[status];
+const excludedBadge = {
+  label: "Exclusă",
+  icon: CircleOff,
+  className: "bg-slate-100 text-slate-600 ring-slate-200",
+  iconClass: "",
+};
+
+/** The source's indexing status, or "Exclusă" for a source switched off in the lists. */
+export function SourceStatusBadge({ status, excluded = false }: { status: AiSourceStatus; excluded?: boolean }) {
+  const { label, icon: Icon, className, iconClass } = excluded ? excludedBadge : badge[status];
   return (
     <span
       className={`inline-flex items-center gap-1.5 whitespace-nowrap rounded-full px-2.5 py-0.5 text-xs font-semibold ring-1 ring-inset ${className}`}
@@ -144,10 +153,10 @@ export function SourceStatusBadge({ status }: { status: AiSourceStatus }) {
 }
 
 /**
- * Whether the assistant searches this source: with "Folosește conținutul site-ului" switched
- * off (settings.useSiteContent = false) only uploaded files are searched.
+ * Whether the assistant searches this source: not when it is excluded, and with "Folosește
+ * conținutul site-ului" switched off (settings.useSiteContent = false) only uploaded files.
  */
-const isUsed = (source: AiSource, useSiteContent: boolean) => useSiteContent || source.kind === "upload";
+const isUsed = (source: AiSource, useSiteContent: boolean) => !source.excluded && (useSiteContent || source.kind === "upload");
 
 /** The sources the assistant currently answers from. */
 export const usedSources = (status: AiStatus) => status.sources.filter((s) => isUsed(s, status.settings.useSiteContent));

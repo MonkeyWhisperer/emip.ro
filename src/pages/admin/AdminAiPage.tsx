@@ -210,7 +210,7 @@ export function AdminAiPage() {
             hidden={tab !== "surse"}
             className="outline-none"
           >
-            <KnowledgePanel status={status} stale={stale} refresh={refresh} patch={patch} onOpenSettings={() => openTab("setari")} />
+            <KnowledgePanel status={status} stale={stale} refresh={refresh} patch={patch} onSettingsSaved={onSettingsSaved} />
           </div>
           <div
             id={`${uid}-panel-setari`}

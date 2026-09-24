@@ -1,6 +1,7 @@
 import { trust, type TrustText } from "../../content/home";
 import { Section, SectionHeader } from "../../components/ui/Section";
 import { SmartLink } from "../../components/ui/SmartLink";
+import { TeamCertifications } from "../../components/ui/TeamCertifications";
 
 const badgeClass = "shrink-0 rounded-full bg-brand-400 px-3 py-1 text-xs font-semibold text-navy-950";
 
@@ -67,9 +68,13 @@ export function Trust() {
         ))}
       </div>
 
+      {/* The team's personal certifications, after the company's own above. Each code's full name
+          is read out by screen readers and shown on hover. */}
+      <TeamCertifications className="mt-10" />
+
       {/* Same columns and gap as the cards above, and each item inset like a card's content
           (1px border + 24px padding), so every label starts where the card text above starts. */}
-      <ul className="mt-10 grid gap-x-6 gap-y-4 rounded-2xl bg-navy-950 py-6 sm:grid-cols-2 lg:grid-cols-4">
+      <ul className="mt-8 grid gap-x-6 gap-y-4 rounded-2xl bg-navy-950 py-6 sm:grid-cols-2 lg:grid-cols-4">
         {trust.guarantees.map(({ icon: Icon, label }) => (
           <li key={label} className="flex items-center gap-3 border-x border-transparent px-6 text-sm font-medium text-white">
             <Icon aria-hidden className="size-5 shrink-0 text-brand-400" />

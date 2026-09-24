@@ -48,8 +48,12 @@ A chat panel on the right side of every public page answers visitors' questions 
   by `npm run knowledge:export`, part of `npm run build`; pages about past events are left out) and every
   published blog post. Blog changes re-sync automatically; the admin panel also has a manual "sync" button.
 - **Training files:** PDF, DOCX, PPTX, TXT, MD, HTML or JSON uploaded in the admin panel (Asistent AI).
-- The setting "Folosește conținutul site-ului" can switch the site content off, so answers come
-  **only from the uploaded files** (the search is filtered to uploads; switching it back on re-syncs the site).
+- The setting "Folosește conținutul site-ului" (in Setări, and as a switch on the Surse tab) can switch the
+  site content off, so answers come **only from the uploaded files** (the search is filtered to uploads;
+  switching it back on re-syncs the site).
+- Each page, post or file can be unchecked on the Surse tab: it is then removed from the vector store and
+  skipped by later syncs (it stays listed so it can be checked again, which re-indexes it). Exclusions are
+  stored by source key in `ai_excluded`, so they survive syncs and `npm run ai:reset`.
 
 Documents are indexed in an OpenAI vector store and retrieved with the `file_search` tool; the
 sources each answer used are recorded in the conversation log (admin panel), not shown to visitors.
@@ -105,10 +109,11 @@ Interrupted answers are not logged.
 - `server/seed/`: the migrated Wix posts (Markdown with JSON frontmatter), imported once
 - `public/media/blog/`: images and attachments of the migrated posts; `public/docs/`: certificates and other PDFs
 
-URLs mirror the old Wix paths (`/functionalitati`, `/noi`, `/post/<slug>`, `/blog/categories/<slug>`, …) so
+URLs mirror the old Wix paths (`/functionalitati`, `/post/<slug>`, `/blog/categories/<slug>`, …; the About page
+moved from `/noi` to `/despre-noi`, and `/noi` redirects there) so
 existing links and search rankings keep working; Wix-only URLs answer with a 301 (server) and a client-side
 redirect (`src/router.tsx`). Old English pages go to their Romanian equivalent when there is one (`/en/noi` →
-`/noi`, `/en/blog/categories/social-economy` → `/blog/categories/economie-sociala`, …), otherwise to `/`.
+`/despre-noi`, `/en/blog/categories/social-economy` → `/blog/categories/economie-sociala`, …), otherwise to `/`.
 
 ## SEO and security headers (production)
 

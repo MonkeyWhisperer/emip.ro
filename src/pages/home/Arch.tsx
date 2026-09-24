@@ -1,6 +1,7 @@
 import { CircleCheck } from "lucide-react";
 import { arch } from "../../content/home";
 import { ButtonLink } from "../../components/ui/ButtonLink";
+import { DemoButton } from "../../components/ui/DemoButton";
 import { IconCard } from "../../components/ui/IconCard";
 import { Section } from "../../components/ui/Section";
 
@@ -28,13 +29,9 @@ export function Arch() {
             ))}
           </ul>
           <div className="mt-10 flex flex-col gap-3 sm:flex-row sm:items-start">
-            {/* The note belongs to the demo button, so it sits directly under it (as in the hero). */}
-            <div className="flex flex-col gap-2">
-              <ButtonLink href={arch.primary.href} arrow>
-                {arch.primary.label}
-              </ButtonLink>
-              <p className="text-center text-xs text-slate-300">{arch.primaryNote}</p>
-            </div>
+            <DemoButton href={arch.primary.href} arrow note={arch.primaryNote}>
+              {arch.primary.label}
+            </DemoButton>
             <ButtonLink href={arch.secondary.href} variant="outline-light">
               {arch.secondary.label}
             </ButtonLink>

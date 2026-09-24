@@ -189,7 +189,8 @@ export function ContactForm() {
     setStatus("idle");
   }
 
-  const card = "rounded-2xl border border-slate-200 bg-white p-6 shadow-xl shadow-navy-900/5 sm:p-8 lg:p-10";
+  // Top padding as in the Contact card beside it (sm:p-8), so both titles start at the same height.
+  const card = "rounded-2xl border border-slate-200 bg-white p-6 shadow-xl shadow-navy-900/5 sm:p-8 lg:p-10 lg:pt-8";
 
   if (status === "done") {
     return (
@@ -292,9 +293,10 @@ export function ContactForm() {
               required
               aria-invalid={errors.consent ? true : undefined}
               aria-describedby={errors.consent ? `${idOf("consent")}-error` : undefined}
-              className="mt-0.5 size-5 shrink-0 cursor-pointer accent-brand-600"
+              // 16px box centred on the label's first 20px line.
+              className="mt-0.5 size-4 shrink-0 cursor-pointer accent-brand-600"
             />
-            <label htmlFor={idOf("consent")} className="text-sm leading-relaxed text-slate-600">
+            <label htmlFor={idOf("consent")} className="text-xs leading-5 text-slate-600">
               {copy.consent.before}
               <a
                 href={copy.consent.link.href}

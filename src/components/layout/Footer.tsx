@@ -20,12 +20,11 @@ export function Footer() {
   const socialLinks = social.filter((s) => s.href && !s.hidden);
 
   return (
-    // --footer-lead: width shared by the description column and the copyright block below it
-    // (the copyright's longest line is ~491px), so the two line up exactly.
-    <footer className="bg-navy-950 text-sm text-slate-300 [--footer-lead:30.75rem]">
-      {/* From xl: the description is as wide as the copyright block, the other columns take their
-          natural width and share the remaining space. 2×2 below xl so no column gets cramped. */}
-      <Container className="grid gap-12 py-12 sm:grid-cols-2 xl:grid-cols-[var(--footer-lead)_auto_auto_auto] xl:justify-between xl:gap-8">
+    <footer className="bg-navy-950 text-sm text-slate-300">
+      {/* From xl: a 24rem description column; the other columns take their natural width and the
+          remaining space goes between the columns (about 90px each in the 1216px container).
+          2×2 below xl so no column gets cramped. */}
+      <Container className="grid gap-12 py-12 sm:grid-cols-2 xl:grid-cols-[24rem_auto_auto_auto] xl:justify-between xl:gap-8">
 
         <div>
           <Logo />
@@ -118,7 +117,7 @@ export function Footer() {
           margin is wider than the button. */}
       <div className="border-t border-white/10">
         <Container className="flex flex-col gap-6 pb-24 pt-8 lg:flex-row lg:items-center lg:justify-between 2xl:pb-8">
-          <div className="space-y-1 text-xs text-slate-300/80 xl:w-[var(--footer-lead)]">
+          <div className="space-y-1 text-xs text-slate-300/80">
             <p>© {new Date().getFullYear()} Platforma eMIP. Toate drepturile rezervate.</p>
             <p>Denumirea eMIP și logo-ul eMIP sunt mărci înregistrate ® ale EMIP SRL, sub licență OSIM.</p>
           </div>

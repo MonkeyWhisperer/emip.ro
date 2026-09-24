@@ -1,6 +1,7 @@
 import { hero, type HeroStat } from "../../content/home";
 import { useCountUp } from "../../hooks/useCountUp";
 import { ButtonLink } from "../../components/ui/ButtonLink";
+import { DemoButton } from "../../components/ui/DemoButton";
 import { Container } from "../../components/ui/Section";
 import heroImage from "../../assets/hero.webp";
 
@@ -59,15 +60,9 @@ export function Hero() {
           <p className="mt-6 max-w-2xl text-xl font-semibold text-brand-300">{hero.subtitle}</p>
           <p className="mt-4 max-w-2xl text-lg leading-relaxed text-slate-200">{hero.text}</p>
           <div className="mt-10 flex flex-col gap-3 sm:flex-row sm:items-start">
-            {/* The note belongs to the demo button, so it sits directly under it. */}
-            <div className="flex flex-col gap-2">
-              <ButtonLink href={hero.primary.href} arrow>
-                {hero.primary.label}
-              </ButtonLink>
-              <p className="text-center text-xs text-slate-300">
-                {hero.primaryNote}
-              </p>
-            </div>
+            <DemoButton href={hero.primary.href} arrow>
+              {hero.primary.label}
+            </DemoButton>
             <ButtonLink href={hero.secondary.href} variant="outline-light">
               {hero.secondary.label}
             </ButtonLink>

@@ -3,6 +3,7 @@ import { Link } from "react-router";
 import { CalendarDays, ChevronDown, FileText, Info, Landmark, TableOfContents, type LucideIcon } from "lucide-react";
 import { legalCta, legalDocs, legalLabels, type LegalDoc } from "../../content/legal/legal";
 import { ButtonLink } from "../../components/ui/ButtonLink";
+import { DemoButton } from "../../components/ui/DemoButton";
 import { Markdown } from "../../components/ui/Markdown";
 import { PageHeader } from "../../components/ui/PageHeader";
 import { PageMeta } from "../../components/ui/PageMeta";
@@ -271,10 +272,10 @@ export function LegalDocument({ doc, source }: Props) {
         <div className="mx-auto max-w-2xl text-center">
           <h2 className="text-2xl font-bold tracking-tight sm:text-3xl">{legalCta.title}</h2>
           <p className="mt-4 text-lg leading-relaxed text-slate-600">{legalCta.text}</p>
-          <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
-            <ButtonLink href={legalCta.primary.href} variant="dark" arrow>
+          <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row sm:items-start">
+            <DemoButton href={legalCta.primary.href} variant="dark" arrow>
               {legalCta.primary.label}
-            </ButtonLink>
+            </DemoButton>
             <ButtonLink href={legalCta.secondary.href} variant="outline">
               {legalCta.secondary.label}
             </ButtonLink>

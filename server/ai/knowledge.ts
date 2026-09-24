@@ -34,7 +34,15 @@ db.exec(`
     local_path     TEXT,
     updated_at     TEXT NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%SZ', 'now'))
   );
+  -- Sources the admin switched off: kept out of the vector store, so answers never use them.
+  -- By key (page:/path, post:id, upload:uuid) and in their own table, so the choice survives
+  -- site syncs, a page that disappears and comes back, and npm run ai:reset.
+  CREATE TABLE IF NOT EXISTS ai_excluded (
+    key TEXT PRIMARY KEY
+  );
 `);
+
+const isExcluded = (key: string) => !!db.prepare("SELECT 1 FROM ai_excluded WHERE key = ?").get(key);
 
 type SourceRow = {
   id: number;
@@ -50,6 +58,8 @@ type SourceRow = {
   error: string | null;
   local_path: string | null;
   updated_at: string;
+  /** 1 when the key is in ai_excluded (only set by queries that join it). */
+  is_excluded?: number;
 };
 
 const toSource = (r: SourceRow): AiSource => ({
@@ -62,12 +72,15 @@ const toSource = (r: SourceRow): AiSource => ({
   status: r.status,
   error: r.error,
   updatedAt: r.updated_at,
+  excluded: r.is_excluded === 1,
 });
 
 const sha256 = (data: Buffer | string) => createHash("sha256").update(data).digest("hex");
 
+const SELECT_SOURCES = "SELECT s.*, e.key IS NOT NULL AS is_excluded FROM ai_sources s LEFT JOIN ai_excluded e ON e.key = s.key";
+
 export function listSources(): AiSource[] {
-  const rows = db.prepare("SELECT * FROM ai_sources ORDER BY kind, title").all() as SourceRow[];
+  const rows = db.prepare(`${SELECT_SOURCES} ORDER BY s.kind, s.title`).all() as SourceRow[];
   return rows.map(toSource);
 }
 
@@ -161,8 +174,9 @@ type Doc = { kind: AiSourceKind; key: string; title: string; url: string | null;
  */
 async function upsertDocument(doc: Doc): Promise<AiSource> {
   if (!openai) throw new Error("OPENAI_API_KEY is not configured");
-  const hash = sha256(doc.content);
   const existing = db.prepare("SELECT * FROM ai_sources WHERE key = ?").get(doc.key) as SourceRow | undefined;
+  if (isExcluded(doc.key)) return keepOutOfStore(doc, existing);
+  const hash = sha256(doc.content);
   // "pending" with a file id means an earlier upload stopped half-way: upload again.
   if (existing && existing.hash === hash && existing.openai_file_id && (existing.status === "ready" || existing.status === "processing")) {
     if (existing.title !== doc.title || existing.url !== doc.url) {
@@ -206,6 +220,8 @@ async function upsertDocument(doc: Doc): Promise<AiSource> {
       file_id: fileId,
       attributes: { kind: doc.kind, title: doc.title.slice(0, 500), url: doc.url ?? "" },
     });
+    // Excluded by the admin while this upload was under way (a sync in progress): take it out again.
+    if (isExcluded(doc.key)) return keepOutOfStore(doc, { ...row, openai_file_id: fileId });
     db.prepare("UPDATE ai_sources SET status = 'processing' WHERE id = ?").run(row.id);
     void waitUntilIndexed(row.id, fileId);
     return toSource({ ...row, openai_file_id: fileId, status: "processing" });
@@ -225,11 +241,70 @@ async function upsertDocument(doc: Doc): Promise<AiSource> {
   }
 }
 
+/**
+ * An excluded document: listed in the admin panel (so it can be switched back on) but not in the
+ * vector store. The empty hash makes it upload again once it is included.
+ */
+async function keepOutOfStore(doc: Doc, existing: SourceRow | undefined): Promise<AiSource> {
+  await removeRemote(existing?.openai_file_id ?? null);
+  const row = db
+    .prepare(
+      `INSERT INTO ai_sources (kind, key, title, url, filename, bytes, hash, status, local_path)
+       VALUES (:kind, :key, :title, :url, :filename, :bytes, '', 'pending', :local_path)
+       ON CONFLICT (key) DO UPDATE SET title = excluded.title, url = excluded.url, filename = excluded.filename,
+         bytes = excluded.bytes, hash = '', status = 'pending', error = NULL, openai_file_id = NULL,
+         local_path = COALESCE(excluded.local_path, ai_sources.local_path)
+       RETURNING *`,
+    )
+    .get({
+      kind: doc.kind,
+      key: doc.key,
+      title: doc.title,
+      url: doc.url,
+      filename: doc.filename,
+      bytes: doc.content.length,
+      local_path: doc.localPath ?? null,
+    }) as SourceRow;
+  return toSource({ ...row, is_excluded: 1 });
+}
+
+/**
+ * Switches sources off (out of the vector store) or back on. Included uploads are re-sent from
+ * their local copy and included pages and posts with a site sync, both in the background.
+ */
+export async function setSourcesExcluded(ids: number[], exclude: boolean): Promise<AiSource[]> {
+  const rows = ids
+    .map((id) => db.prepare("SELECT * FROM ai_sources WHERE id = ?").get(id) as SourceRow | undefined)
+    .filter((r): r is SourceRow => !!r);
+  for (const row of rows) {
+    if (exclude) {
+      db.prepare("INSERT OR IGNORE INTO ai_excluded (key) VALUES (?)").run(row.key);
+      await removeRemote(row.openai_file_id);
+      db.prepare("UPDATE ai_sources SET openai_file_id = NULL, hash = '', status = 'pending', error = NULL WHERE id = ?").run(row.id);
+    } else {
+      db.prepare("DELETE FROM ai_excluded WHERE key = ?").run(row.key);
+    }
+  }
+  if (!exclude && openai) {
+    for (const row of rows.filter((r) => r.kind === "upload")) {
+      void retrySource(row.id).catch((err) =>
+        db.prepare("UPDATE ai_sources SET status = 'failed', error = ? WHERE id = ?").run(errorMessage(err), row.id),
+      );
+    }
+    // With site content switched off, pages and posts are uploaded when it is switched back on.
+    if (rows.some((r) => r.kind !== "upload") && getSettings().useSiteContent) void syncSite();
+  }
+  const changed = new Set(rows.map((r) => r.id));
+  return listSources().filter((s) => changed.has(s.id));
+}
+
 export async function removeSource(id: number): Promise<boolean> {
   const row = db.prepare("SELECT * FROM ai_sources WHERE id = ?").get(id) as SourceRow | undefined;
   if (!row) return false;
   await removeRemote(row.openai_file_id);
   db.prepare("DELETE FROM ai_sources WHERE id = ?").run(id);
+  // An upload's key is never reused; a page's or post's exclusion must outlive a sync that drops it.
+  if (row.kind === "upload") db.prepare("DELETE FROM ai_excluded WHERE key = ?").run(row.key);
   if (row.local_path) await rm(row.local_path, { force: true });
   return true;
 }

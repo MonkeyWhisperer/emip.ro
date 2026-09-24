@@ -1,7 +1,7 @@
 import { Hono } from "hono";
 import { bodyLimit } from "hono/body-limit";
 import type { AiStatus } from "../../shared/ai.ts";
-import { ValidationError } from "../validate.ts";
+import { ValidationError, objectBody } from "../validate.ts";
 import { DAILY_TOKEN_LIMIT, clearConversations, deleteConversation, listConversations, tokensToday, usageToday } from "./chat.ts";
 import { getSettings, saveSettings } from "./settings.ts";
 import {
@@ -14,6 +14,7 @@ import {
   refreshProcessing,
   removeSource,
   retrySource,
+  setSourcesExcluded,
   siteSyncRunning,
   syncSite,
 } from "./knowledge.ts";
@@ -61,6 +62,21 @@ adminAi.post("/sources/:id{[0-9]+}/retry", async (c) => {
   requireKey();
   const source = await retrySource(Number(c.req.param("id")));
   return source ? c.json(source) : c.json({ error: "Sursa nu a fost găsită." }, 404);
+});
+
+/**
+ * Switches sources off or back on: { ids: number[], excluded: boolean }. Excluded sources leave the
+ * vector store (answers never use them) but stay listed; the response lists the updated sources.
+ */
+adminAi.post("/sources/excluded", bodyLimit({ maxSize: 20_000 }), async (c) => {
+  requireKey();
+  const body = objectBody(await c.req.json());
+  const { ids, excluded } = body;
+  if (!Array.isArray(ids) || ids.length === 0 || ids.length > 1000 || !ids.every((id) => Number.isSafeInteger(id) && id > 0)) {
+    throw new ValidationError({ ids: "Lista de surse este invalidă." });
+  }
+  if (typeof excluded !== "boolean") throw new ValidationError({ excluded: "Valoare invalidă." });
+  return c.json(await setSourcesExcluded(ids as number[], excluded));
 });
 
 adminAi.delete("/sources/:id{[0-9]+}", async (c) =>

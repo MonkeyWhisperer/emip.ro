@@ -1,5 +1,5 @@
 import { contactPage } from "../../content/contact";
-import { ButtonLink } from "../../components/ui/ButtonLink";
+import { DemoButton } from "../../components/ui/DemoButton";
 import { PageHeader } from "../../components/ui/PageHeader";
 import { PageMeta } from "../../components/ui/PageMeta";
 import { Section } from "../../components/ui/Section";
@@ -14,9 +14,9 @@ export function ContactPage() {
     <>
       <PageMeta title={meta.title} description={meta.description} />
       <PageHeader eyebrow={header.eyebrow} title={header.title} text={header.text}>
-        <ButtonLink href={header.cta.href} arrow>
+        <DemoButton href={header.cta.href} arrow>
           {header.cta.label}
-        </ButtonLink>
+        </DemoButton>
       </PageHeader>
 
       {/* Mobile: details, form, team. Desktop: details and team on the left, the form on the right. */}

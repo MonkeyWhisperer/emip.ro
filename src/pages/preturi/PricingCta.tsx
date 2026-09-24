@@ -1,5 +1,6 @@
 import { cta } from "../../content/preturi";
 import { ButtonLink } from "../../components/ui/ButtonLink";
+import { DemoButton } from "../../components/ui/DemoButton";
 import { Container } from "../../components/ui/Section";
 
 export function PricingCta() {
@@ -11,10 +12,10 @@ export function PricingCta() {
           <div aria-hidden className="absolute -left-24 -top-32 -z-10 size-80 rounded-full bg-navy-600/40 blur-3xl" />
           <h2 className="mx-auto max-w-2xl text-3xl font-bold tracking-tight text-white sm:text-4xl">{cta.title}</h2>
           <p className="mx-auto mt-4 max-w-2xl text-lg text-slate-200">{cta.text}</p>
-          <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
-            <ButtonLink href={cta.primary.href} arrow>
+          <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row sm:items-start">
+            <DemoButton href={cta.primary.href} arrow>
               {cta.primary.label}
-            </ButtonLink>
+            </DemoButton>
             <ButtonLink href={cta.secondary.href} variant="outline-light">
               {cta.secondary.label}
             </ButtonLink>

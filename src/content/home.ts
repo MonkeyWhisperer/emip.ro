@@ -50,11 +50,10 @@ export const hero = {
   subtitle: "Zero corecții financiare pe proiectele PEO & PIDS",
   text: "Asigurați conformitatea MIPE și automatizați 90% din munca de raportare. Gestionați proiecte, echipe și bugete dintr-o singură platformă.",
   primary: { label: "Accesează cont demo", href: APP_URL } satisfies Cta,
-  primaryNote: "Cu proiecte demo virtualizate.",
   secondary: { label: "Planifică un workshop", href: "/servicii" } satisfies Cta,
   // The numbers count up from 0 when the bar scrolls into view; a year (`countUp: false`) doesn't.
   stats: [
-    { value: 300, suffix: "+", label: "Proiecte finalizate" },
+    { value: 500, suffix: "+", label: "Proiecte gestionate" },
     { value: 2018, prefix: "Din ", label: "Alături de beneficiari", countUp: false },
     { value: 90, suffix: "%", label: "Reducere timp raportare" },
     { value: 10, suffix: "x", label: "Mai multe proiecte în paralel" },
@@ -339,27 +338,23 @@ export const useCases = {
       icon: Briefcase,
       title: "Firme de Consultanță",
       text: "Gestionați simultan mai multe proiecte pentru clienți diferiți. Rapoarte personalizate per client.",
-      tags: ["Proiecte multiple", "Rapoarte pe client", "KPI, Rezultate, MGT"],
     },
     {
       icon: Factory,
       title: "Companii",
       text: "Proiecte și planuri de afaceri finanțate din fonduri europene. Tracking progres tehnic și monitorizarea încadrării în buget.",
-      tags: ["Integrare API", "Tracking ore", "Milestone-uri tehnice"],
     },
     {
       icon: HeartHandshake,
       title: "ONG-uri",
       text: "Proiecte sociale și educaționale. Raportare simplificată pentru finanțatori multipli.",
-      tags: ["Indicatori sociali", "Beneficiari", "Raportare MySMIS"],
     },
     {
       icon: Landmark,
       title: "Instituții Publice",
       text: "Conformitate garantată cu legislația. Audit trail complet și transparență.",
-      tags: ["Transparență", "Audit trail", "Conformitate legală"],
     },
-  ],
+  ] satisfies IconCard[],
 };
 
 export const finalCta = {
@@ -384,8 +379,13 @@ export const blog = {
 };
 
 export const newsletter = {
-  title: "Rămâi conectat cu eMIP Project & Business Plans",
+  title: "Rămâi conectat cu eMIP",
   text: "Abonează-te la newsletter-ul nostru și nu rata noutățile.",
   consent: "Vreau să mă abonez la lista de corespondență eMIP.",
   button: "Abonare",
+  errors: {
+    emailMissing: "Introdu adresa de email.",
+    email: "Adresa de email nu este validă.",
+    consent: "Bifează căsuța să te poți abona.",
+  },
 };

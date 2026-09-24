@@ -126,6 +126,17 @@ export function SettingsPanel({ settings, configured, usageToday, readyUploads, 
 
   useEffect(() => onDirtyChange(dirty), [dirty, onDirtyChange]);
 
+  // The Surse tab has its own switch for site content: follow it, so a later save here doesn't
+  // switch it back (unless it was changed here too and not saved yet: that change is kept).
+  const lastSiteContent = useRef(settings.useSiteContent);
+  useEffect(() => {
+    const before = lastSiteContent.current;
+    lastSiteContent.current = settings.useSiteContent;
+    if (before === settings.useSiteContent) return;
+    setBaseline((b) => ({ ...b, useSiteContent: settings.useSiteContent }));
+    setForm((f) => (f.useSiteContent === before ? { ...f, useSiteContent: settings.useSiteContent } : f));
+  }, [settings.useSiteContent]);
+
   // Restored changes are now in the form; forget the stashed copy.
   useEffect(() => dropDraft(DRAFT_KEY), []);
 

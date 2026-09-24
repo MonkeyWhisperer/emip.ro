@@ -1,10 +1,10 @@
 import { useEffect, useId, useMemo, useRef, useState } from "react";
-import { ChevronDown, CircleOff, FolderOpen, LoaderCircle, RefreshCw, Settings } from "lucide-react";
-import type { AiSource, AiStatus } from "../../../../shared/ai";
-import { deleteAiSource, retryAiSource, syncSiteKnowledge } from "../../../lib/aiAdminApi";
+import { ChevronDown, CircleOff, FolderOpen, LoaderCircle, RefreshCw } from "lucide-react";
+import type { AiSettings, AiSource, AiStatus } from "../../../../shared/ai";
+import { deleteAiSource, retryAiSource, saveAiSettings, setAiSourcesExcluded, syncSiteKnowledge } from "../../../lib/aiAdminApi";
 import { useAdmin } from "../AdminContext";
 import { ConfirmDialog } from "../Dialog";
-import { Alert, Button, Card, formatDateTime, isUnauthorized, plural } from "../ui";
+import { Alert, Button, Card, Toggle, formatDateTime, isUnauthorized, plural } from "../ui";
 import { SourceList } from "./SourceList";
 import { TrainingUpload } from "./TrainingUpload";
 import { aiErrorMessage, countByStatus, refocusButton } from "./shared";
@@ -15,7 +15,8 @@ type Props = {
   stale: boolean;
   refresh: () => Promise<AiStatus | null>;
   patch: (fn: (status: AiStatus) => AiStatus) => void;
-  onOpenSettings: () => void;
+  /** After the "answer from the site's content" switch here was saved (same as a save in Setări). */
+  onSettingsSaved: (settings: AiSettings, before: AiSettings) => void;
 };
 
 const upsert = (sources: AiSource[], source: AiSource) =>
@@ -26,10 +27,12 @@ const failedFirst = (list: AiSource[]) =>
   list.map((s, i) => ({ s, i })).sort((a, b) => Number(b.s.status === "failed") - Number(a.s.status === "failed") || a.i - b.i).map(({ s }) => s);
 
 /** "Surse de cunoștințe" tab: uploaded training files and the site's own pages and posts. */
-export function KnowledgePanel({ status, stale, refresh, patch, onOpenSettings }: Props) {
+export function KnowledgePanel({ status, stale, refresh, patch, onSettingsSaved }: Props) {
   const { toast } = useAdmin();
   const uid = useId();
   const [busyIds, setBusyIds] = useState<ReadonlySet<number>>(new Set());
+  /** The site-content switch while its new value is being saved. */
+  const [siteDraft, setSiteDraft] = useState<boolean | null>(null);
   const [toDelete, setToDelete] = useState<AiSource | null>(null);
   const [deleting, setDeleting] = useState(false);
   const [syncRequested, setSyncRequested] = useState(false);
@@ -48,7 +51,8 @@ export function KnowledgePanel({ status, stale, refresh, patch, onOpenSettings }
   const indexingUploads = uploads.filter((s) => s.status === "pending" || s.status === "processing").length;
   const pages = useMemo(() => failedFirst(sources.filter((s) => s.kind === "page")), [sources]);
   const posts = useMemo(() => failedFirst(sources.filter((s) => s.kind === "post")), [sources]);
-  const siteCounts = countByStatus([...pages, ...posts]);
+  const siteExcluded = [...pages, ...posts].filter((s) => s.excluded).length;
+  const siteCounts = countByStatus([...pages, ...posts].filter((s) => !s.excluded));
   const siteIndexing = siteCounts.pending + siteCounts.processing;
   const syncing = siteSyncRunning || syncRequested;
 
@@ -59,13 +63,63 @@ export function KnowledgePanel({ status, stale, refresh, patch, onOpenSettings }
     refocusButton(syncId);
   }, [syncing, syncId]);
 
-  const setBusy = (id: number, on: boolean) =>
+  const setBusy = (id: number | number[], on: boolean) =>
     setBusyIds((s) => {
       const next = new Set(s);
-      if (on) next.add(id);
-      else next.delete(id);
+      for (const i of Array.isArray(id) ? id : [id]) {
+        if (on) next.add(i);
+        else next.delete(i);
+      }
       return next;
     });
+
+  /** Unchecked sources are kept out of the search; checked ones are indexed again. */
+  async function setExcluded(list: AiSource[], excluded: boolean) {
+    if (!list.length) return;
+    const ids = list.map((s) => s.id);
+    setBusy(ids, true);
+    try {
+      const updated = await setAiSourcesExcluded(ids, excluded);
+      // Included pages and posts come back with a site sync (started by the server when site content is on).
+      const syncStarted = !excluded && useSite && configured && list.some((s) => s.kind !== "upload");
+      patch((s) => ({ ...s, sources: updated.reduce(upsert, s.sources), ...(syncStarted && { siteSyncRunning: true }) }));
+      const what = list.length === 1 ? `„${list[0].title}”` : plural(list.length, "sursă", "surse");
+      const waitsForSite = !excluded && !useSite && list.every((s) => s.kind !== "upload");
+      toast(
+        excluded
+          ? `Asistentul nu mai folosește ${what}.`
+          : waitsForSite
+            ? `${list.length === 1 ? "Sursa va fi folosită" : "Sursele vor fi folosite"} când reactivați conținutul site-ului.`
+            : `Asistentul folosește din nou ${what}; se indexează.`,
+      );
+      void refresh();
+    } catch (err) {
+      if (!isUnauthorized(err)) toast(aiErrorMessage(err, "Modificarea nu a putut fi salvată."), "error");
+    } finally {
+      setBusy(ids, false);
+    }
+  }
+
+  async function setUseSite(on: boolean) {
+    if (siteDraft !== null) return;
+    const before = status.settings;
+    setSiteDraft(on);
+    try {
+      const saved = await saveAiSettings({ ...before, useSiteContent: on });
+      onSettingsSaved(saved, before);
+      toast(
+        on
+          ? configured
+            ? "Asistentul răspunde din nou din conținutul site-ului. Paginile și articolele se sincronizează acum."
+            : "Asistentul va răspunde din conținutul site-ului."
+          : "Asistentul nu mai răspunde din conținutul site-ului, doar din fișierele încărcate.",
+      );
+    } catch (err) {
+      if (!isUnauthorized(err)) toast(aiErrorMessage(err, "Setarea nu a putut fi salvată."), "error");
+    } finally {
+      setSiteDraft(null);
+    }
+  }
 
   function onUploaded(source: AiSource) {
     patch((s) => ({ ...s, sources: upsert(s.sources, source) }));
@@ -150,6 +204,7 @@ export function KnowledgePanel({ status, stale, refresh, patch, onOpenSettings }
     busyIds,
     onRetry: (s: AiSource) => void retry(s),
     onDelete: setToDelete,
+    onSetExcluded: (list: AiSource[], excluded: boolean) => void setExcluded(list, excluded),
   };
 
   return (
@@ -157,18 +212,15 @@ export function KnowledgePanel({ status, stale, refresh, patch, onOpenSettings }
       <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
         {useSite ? (
           <p className="max-w-3xl text-sm leading-relaxed text-slate-600">
-            Asistentul răspunde <strong className="font-semibold text-navy-950">doar</strong> pe baza surselor de mai jos: paginile
-            site-ului, articolele publicate pe blog și fișierele încărcate aici. Paginile și articolele se sincronizează automat după
-            fiecare modificare pe blog și după fiecare publicare (deploy) a site-ului.
+            Asistentul răspunde <strong className="font-semibold text-navy-950">doar</strong> pe baza surselor bifate de mai jos:
+            paginile site-ului, articolele publicate pe blog și fișierele încărcate aici. Debifați o sursă ca asistentul să nu o mai
+            folosească. Paginile și articolele se sincronizează automat după fiecare modificare pe blog și după fiecare publicare
+            (deploy) a site-ului.
           </p>
         ) : (
           <p className="max-w-3xl text-sm leading-relaxed text-slate-600">
-            Asistentul răspunde <strong className="font-semibold text-navy-950">doar din fișierele încărcate</strong> mai jos.
-            Conținutul site-ului (pagini și articole) este dezactivat din{" "}
-            <button type="button" onClick={onOpenSettings} className="font-semibold text-navy-700 underline underline-offset-2 hover:text-navy-900">
-              Setări
-            </button>{" "}
-            și nu este folosit în răspunsuri.
+            Asistentul răspunde <strong className="font-semibold text-navy-950">doar din fișierele încărcate</strong> și bifate mai
+            jos. Conținutul site-ului (pagini și articole) este dezactivat și nu este folosit în răspunsuri.
           </p>
         )}
         <Button id={refreshId} variant="ghost" size="sm" icon={RefreshCw} busy={refreshing} onClick={() => void manualRefresh()} className="self-start">
@@ -182,7 +234,7 @@ export function KnowledgePanel({ status, stale, refresh, patch, onOpenSettings }
           <p className="mt-0.5">
             {indexingUploads > 0
               ? "Conținutul site-ului este dezactivat, iar fișierele încărcate se indexează încă. Până când cel puțin unul este gata, asistentul nu poate răspunde din surse."
-              : "Conținutul site-ului este dezactivat și niciun fișier încărcat nu este gata. Încărcați cel puțin un fișier sau reactivați conținutul site-ului din Setări."}
+              : "Conținutul site-ului este dezactivat și niciun fișier încărcat nu este gata. Încărcați cel puțin un fișier sau reactivați conținutul site-ului mai jos."}
           </p>
         </Alert>
       )}
@@ -230,17 +282,20 @@ export function KnowledgePanel({ status, stale, refresh, patch, onOpenSettings }
           )
         }
       >
-        {!useSite && (
-          <div className="mb-5 flex flex-col gap-3 rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-700 sm:flex-row sm:items-center sm:justify-between">
-            <p className="leading-relaxed">
-              Dezactivat din Setări: asistentul <strong className="font-semibold text-navy-950">nu caută</strong> în paginile și
-              articolele site-ului. Sincronizarea automată este oprită; la reactivare, conținutul se sincronizează imediat.
-            </p>
-            <Button variant="secondary" size="sm" icon={Settings} onClick={onOpenSettings} className="self-start sm:self-center">
-              Deschide setările
-            </Button>
-          </div>
-        )}
+        {/* The same setting as "Surse pentru răspunsuri" in Setări, saved as soon as it is switched. */}
+        <div className="mb-5 rounded-xl border border-slate-200 bg-white px-4 py-3">
+          <Toggle
+            id={`${uid}-use-site`}
+            checked={siteDraft ?? useSite}
+            onChange={(on) => void setUseSite(on)}
+            label="Răspunde din conținutul site-ului (pagini și articole)"
+            hint={
+              useSite
+                ? "Dezactivat, asistentul răspunde doar din fișierele încărcate. Paginile sau articolele debifate mai jos nu sunt folosite nici acum."
+                : "Dezactivat acum: asistentul nu caută în paginile și articolele site-ului, iar sincronizarea automată este oprită. La reactivare, conținutul se sincronizează imediat."
+            }
+          />
+        </div>
         <div className={useSite ? "" : "opacity-70"}>
           <div className="flex flex-col gap-4 md:flex-row md:items-start md:justify-between">
             <div className="min-w-0 text-sm text-slate-600" role="status">
@@ -308,6 +363,11 @@ export function KnowledgePanel({ status, stale, refresh, patch, onOpenSettings }
                   {siteCounts.failed > 0 && (
                     <li className="rounded-full bg-red-50 px-2.5 py-0.5 text-red-800 ring-1 ring-red-200 ring-inset">
                       {siteCounts.failed} cu erori
+                    </li>
+                  )}
+                  {siteExcluded > 0 && (
+                    <li className="rounded-full bg-slate-100 px-2.5 py-0.5 text-slate-600 ring-1 ring-slate-200 ring-inset">
+                      {siteExcluded} {siteExcluded === 1 ? "exclusă" : "excluse"}
                     </li>
                   )}
                 </ul>

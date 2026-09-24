@@ -1,3 +1,4 @@
+import { useEffect, useRef } from "react";
 import { ExternalLink, RotateCcw, Trash } from "lucide-react";
 import type { AiSource } from "../../../../shared/ai";
 import { buttonClass } from "../ui";
@@ -19,6 +20,29 @@ const iconAction =
 
 const fileType = (s: AiSource) => s.filename.match(/\.([^.]+)$/)?.[1]?.toUpperCase() ?? "";
 
+const checkboxClass = "size-4 cursor-pointer accent-brand-700 disabled:cursor-not-allowed disabled:opacity-50";
+
+/** Checks every source of the list, unchecks all when all are checked; "mixed" while some are. */
+function AllCheckbox({ sources, caption, disabled, onChange }: { sources: AiSource[]; caption: string; disabled: boolean; onChange: (included: boolean) => void }) {
+  const ref = useRef<HTMLInputElement>(null);
+  const included = sources.filter((s) => !s.excluded).length;
+  const mixed = included > 0 && included < sources.length;
+  useEffect(() => {
+    if (ref.current) ref.current.indeterminate = mixed;
+  }, [mixed]);
+  return (
+    <input
+      ref={ref}
+      type="checkbox"
+      checked={included === sources.length}
+      disabled={disabled}
+      onChange={() => onChange(included !== sources.length)}
+      aria-label={`Folosește toate în răspunsuri: ${caption}`}
+      className={checkboxClass}
+    />
+  );
+}
+
 type Props = {
   sources: AiSource[];
   /** Screen-reader caption of the table. */
@@ -33,10 +57,37 @@ type Props = {
   busyIds: ReadonlySet<number>;
   onRetry: (source: AiSource) => void;
   onDelete: (source: AiSource) => void;
+  /** Checkbox "used in answers": unchecked sources are excluded (kept out of the search). */
+  onSetExcluded: (sources: AiSource[], excluded: boolean) => void;
 };
 
-export function SourceList({ sources, caption, deletable, configured, syncRunning, retryable = true, busyIds, onRetry, onDelete }: Props) {
-  const canRetry = (s: AiSource) => retryable && (s.status === "failed" || isStuck(s, syncRunning));
+export function SourceList({
+  sources,
+  caption,
+  deletable,
+  configured,
+  syncRunning,
+  retryable = true,
+  busyIds,
+  onRetry,
+  onDelete,
+  onSetExcluded,
+}: Props) {
+  const canRetry = (s: AiSource) => retryable && !s.excluded && (s.status === "failed" || isStuck(s, syncRunning));
+  const anyBusy = sources.some((s) => busyIds.has(s.id));
+  // All of the list: include the excluded ones, or exclude all when every one is included.
+  const setAll = (included: boolean) => onSetExcluded(sources.filter((s) => s.excluded === included), !included);
+
+  const rowCheckbox = (s: AiSource) => (
+    <input
+      type="checkbox"
+      checked={!s.excluded}
+      disabled={!configured || busyIds.has(s.id)}
+      onChange={(e) => onSetExcluded([s], !e.target.checked)}
+      aria-label={`Folosește în răspunsuri: ${s.title}`}
+      className={checkboxClass}
+    />
+  );
 
   const problem = (s: AiSource) =>
     s.status === "failed" ? (
@@ -73,6 +124,9 @@ export function SourceList({ sources, caption, deletable, configured, syncRunnin
           <caption className="sr-only">{caption}</caption>
           <thead className="border-b border-slate-200 bg-slate-50 text-xs font-semibold uppercase tracking-wider text-slate-500">
             <tr>
+              <th scope="col" className="w-12 py-3 pl-4">
+                <AllCheckbox sources={sources} caption={caption} disabled={!configured || anyBusy} onChange={setAll} />
+              </th>
               <th scope="col" className="px-4 py-3">
                 Sursă
               </th>
@@ -93,8 +147,9 @@ export function SourceList({ sources, caption, deletable, configured, syncRunnin
           <tbody className="divide-y divide-slate-100">
             {sources.map((s) => (
               <tr key={s.id} className="align-top transition-colors hover:bg-slate-50/70">
+                <td className="py-3.5 pl-4">{rowCheckbox(s)}</td>
                 <td className="px-4 py-3">
-                  <span className="block break-words font-semibold text-navy-950">{s.title}</span>
+                  <span className={`block break-words font-semibold ${s.excluded ? "text-slate-500" : "text-navy-950"}`}>{s.title}</span>
                   {subtitle(s)}
                   {problem(s)}
                 </td>
@@ -103,7 +158,7 @@ export function SourceList({ sources, caption, deletable, configured, syncRunnin
                   {deletable && fileType(s) && <span className="block text-xs text-slate-500">{fileType(s)}</span>}
                 </td>
                 <td className="px-4 py-3">
-                  <SourceStatusBadge status={s.status} />
+                  <SourceStatusBadge status={s.status} excluded={s.excluded} />
                   <time dateTime={s.updatedAt} className="mt-1 block text-xs text-slate-500 lg:hidden">
                     {formatShort(s.updatedAt)}
                   </time>
@@ -146,17 +201,22 @@ export function SourceList({ sources, caption, deletable, configured, syncRunnin
       </div>
 
       {/* Phone: cards */}
+      <label className="mb-3 flex items-center gap-3 text-sm font-medium text-slate-700 md:hidden">
+        <AllCheckbox sources={sources} caption={caption} disabled={!configured || anyBusy} onChange={setAll} />
+        Folosește toate
+      </label>
       <ul className="space-y-3 md:hidden" aria-label={caption}>
         {sources.map((s) => (
           <li key={s.id} className="rounded-xl border border-slate-200 bg-white p-4">
             <div className="flex flex-wrap items-center gap-2">
-              <SourceStatusBadge status={s.status} />
+              {rowCheckbox(s)}
+              <SourceStatusBadge status={s.status} excluded={s.excluded} />
               <span className="text-xs text-slate-500">
                 {deletable && fileType(s) ? `${fileType(s)} · ` : ""}
                 {formatBytes(s.bytes)} · <time dateTime={s.updatedAt}>{formatShort(s.updatedAt)}</time>
               </span>
             </div>
-            <p className="mt-2 break-words text-sm font-semibold leading-snug text-navy-950">{s.title}</p>
+            <p className={`mt-2 break-words text-sm font-semibold leading-snug ${s.excluded ? "text-slate-500" : "text-navy-950"}`}>{s.title}</p>
             {subtitle(s)}
             {problem(s)}
             {(canRetry(s) || deletable) && (

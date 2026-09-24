@@ -1,5 +1,6 @@
 import { finalCta } from "../../content/home";
 import { ButtonLink } from "../../components/ui/ButtonLink";
+import { DemoButton } from "../../components/ui/DemoButton";
 import { Container } from "../../components/ui/Section";
 
 export function FinalCta() {
@@ -15,10 +16,10 @@ export function FinalCta() {
             <div>
               <h2 className="text-3xl font-bold tracking-tight text-white sm:text-4xl">{finalCta.title}</h2>
               <p className="mt-4 text-lg text-slate-200">{finalCta.text}</p>
-              <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-                <ButtonLink href={finalCta.primary.href} arrow>
+              <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-start">
+                <DemoButton href={finalCta.primary.href} arrow>
                   {finalCta.primary.label}
-                </ButtonLink>
+                </DemoButton>
                 <ButtonLink href={finalCta.secondary.href} variant="outline-light">
                   {finalCta.secondary.label}
                 </ButtonLink>

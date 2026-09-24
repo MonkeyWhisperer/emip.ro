@@ -81,6 +81,13 @@ export const retryAiSource = (id: number) => adminFetch<AiSource>(`/admin/ai/sou
 
 export const deleteAiSource = (id: number) => adminFetch<{ ok: true }>(`/admin/ai/sources/${id}`, { method: "DELETE" });
 
+/**
+ * Switches sources off (the assistant no longer uses them) or back on (they are indexed again in
+ * the background). Returns the updated sources.
+ */
+export const setAiSourcesExcluded = (ids: number[], excluded: boolean) =>
+  adminFetch<AiSource[]>("/admin/ai/sources/excluded", { method: "POST", json: { ids, excluded } });
+
 /** Re-indexes site pages and published posts (only changed ones are uploaded). Returns immediately. */
 export const syncSiteKnowledge = () => adminFetch<{ ok: true }>("/admin/ai/sync-site", { method: "POST" });
 

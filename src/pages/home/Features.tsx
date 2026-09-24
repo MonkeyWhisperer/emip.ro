@@ -1,5 +1,6 @@
 import { features } from "../../content/home";
 import { ButtonLink } from "../../components/ui/ButtonLink";
+import { IconCard } from "../../components/ui/IconCard";
 import { Section, SectionHeader } from "../../components/ui/Section";
 
 export function Features() {
@@ -7,17 +8,10 @@ export function Features() {
     <Section id="functionalitati">
       <SectionHeader eyebrow={features.eyebrow} title={features.title} text={features.text} />
 
-      <div className="mt-14 grid gap-x-8 gap-y-10 sm:grid-cols-2 lg:grid-cols-4">
-        {features.items.map(({ icon: Icon, title, text }) => (
-          <div key={title}>
-            <div className="flex items-center gap-4">
-              <div className="flex size-11 shrink-0 items-center justify-center rounded-xl bg-navy-900 text-brand-400">
-                <Icon aria-hidden className="size-5" />
-              </div>
-              <h3 className="font-semibold">{title}</h3>
-            </div>
-            <p className="mt-3 text-sm leading-relaxed text-slate-600">{text}</p>
-          </div>
+      {/* The same cards as the Benefits section. */}
+      <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        {features.items.map((item) => (
+          <IconCard key={item.title} {...item} layout="title-row" compact />
         ))}
       </div>
 

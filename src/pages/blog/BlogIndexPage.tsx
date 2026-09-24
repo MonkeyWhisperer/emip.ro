@@ -67,25 +67,26 @@ export function BlogIndexPage() {
           category?.description ||
           "Articole, știri și analize despre managementul proiectelor finanțate, digitalizare, antreprenoriat și formare profesională."
         }
-      >
-        <nav aria-label="Categorii blog">
-          <ul className="flex flex-wrap gap-2">
-            <li>
-              {/* Also highlighted on /blog/page/N, which `end` alone would not match. */}
-              <NavLink to="/blog" end className={({ isActive }) => chipClass({ isActive: isActive || !category })}>
-                Toate <span className="opacity-75">{posts.length}</span>
-              </NavLink>
-            </li>
-            {usedCategories.map((c) => (
-              <li key={c.slug}>
-                <NavLink to={categoryPath(c.slug)} className={chipClass}>
-                  {c.label} <span className="opacity-75">{inCategory(c.slug).length}</span>
+        wide={
+          <nav aria-label="Categorii blog">
+            <ul className="flex flex-wrap gap-2">
+              <li>
+                {/* Also highlighted on /blog/page/N, which `end` alone would not match. */}
+                <NavLink to="/blog" end className={({ isActive }) => chipClass({ isActive: isActive || !category })}>
+                  Toate <span className="opacity-75">{posts.length}</span>
                 </NavLink>
               </li>
-            ))}
-          </ul>
-        </nav>
-      </PageHeader>
+              {usedCategories.map((c) => (
+                <li key={c.slug}>
+                  <NavLink to={categoryPath(c.slug)} className={chipClass}>
+                    {c.label} <span className="opacity-75">{inCategory(c.slug).length}</span>
+                  </NavLink>
+                </li>
+              ))}
+            </ul>
+          </nav>
+        }
+      />
 
       <Section tone="muted">
         {/* The cards are h3s; this keeps the heading outline h1 > h2 > h3. */}

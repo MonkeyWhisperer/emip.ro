@@ -17,9 +17,10 @@ export function Timeline() {
           const current = i === lastIndex;
           return (
             <li key={year} className="relative pl-10 lg:grid lg:grid-cols-2 lg:pl-0 lg:not-first:-mt-10">
+              {/* The item is as tall as its card, so this centres the dot on the card. */}
               <span
                 aria-hidden
-                className={`absolute left-3 top-8 size-4 -translate-x-1/2 rounded-full ring-4 ring-white lg:left-1/2 ${
+                className={`absolute left-3 top-1/2 size-4 -translate-x-1/2 -translate-y-1/2 rounded-full ring-4 ring-white lg:left-1/2 ${
                   current ? "bg-navy-900" : "bg-brand-500"
                 }`}
               />
