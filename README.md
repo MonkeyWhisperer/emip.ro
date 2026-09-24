@@ -51,8 +51,9 @@ A chat panel on the right side of every public page answers visitors' questions 
 - The setting "Folosește conținutul site-ului" can switch the site content off, so answers come
   **only from the uploaded files** (the search is filtered to uploads; switching it back on re-syncs the site).
 
-Documents are indexed in an OpenAI vector store and retrieved with the `file_search` tool; answers
-cite their sources. The key (`OPENAI_API_KEY`) stays on the server. OpenAI is asked not to store
+Documents are indexed in an OpenAI vector store and retrieved with the `file_search` tool; the
+sources each answer used are recorded in the conversation log (admin panel), not shown to visitors.
+The key (`OPENAI_API_KEY`) stays on the server. OpenAI is asked not to store
 responses (`store: false`).
 
 **Cost limits** (anonymous visitors can use the chat, so every request is bounded; days are UTC):

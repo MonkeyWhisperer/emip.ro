@@ -7,7 +7,7 @@ export const fetchChatConfig = () => apiFetch<ChatConfig>("/chat/config");
 
 type StreamHandlers = {
   onDelta: (text: string) => void;
-  onSources: (sources: ChatSource[]) => void;
+  onSources?: (sources: ChatSource[]) => void;
 };
 
 /**
@@ -49,7 +49,7 @@ export async function streamChat(
       if (!data) continue;
       const event = JSON.parse(data) as ChatEvent;
       if (event.type === "delta") handlers.onDelta(event.text);
-      else if (event.type === "sources") handlers.onSources(event.sources);
+      else if (event.type === "sources") handlers.onSources?.(event.sources);
       else if (event.type === "error") throw new Error(event.message);
       else if (event.type === "done") return;
     }

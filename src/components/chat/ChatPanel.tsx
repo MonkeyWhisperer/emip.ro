@@ -2,12 +2,13 @@ import { useEffect, useRef, useState, type ComponentProps, type FormEvent, type 
 import { useLocation } from "react-router";
 import ReactMarkdown, { type Components } from "react-markdown";
 import remarkGfm from "remark-gfm";
-import { ArrowUp, BookOpen, RotateCcw, Sparkles, Square, X } from "lucide-react";
+import { ArrowUp, RotateCcw, Sparkles, Square, X } from "lucide-react";
 import { ApiError } from "../../lib/api";
-import { streamChat, type ChatConfig, type ChatSource } from "../../lib/chat";
+import { streamChat, type ChatConfig } from "../../lib/chat";
 import { SmartLink } from "../ui/SmartLink";
 
-type Message = { role: "user" | "assistant"; content: string; sources?: ChatSource[]; error?: boolean };
+// Visitors don't see the answer's sources (the conversation log in the admin panel does).
+type Message = { role: "user" | "assistant"; content: string; error?: boolean };
 
 const STORAGE_KEY = "emip-chat";
 const MAX_CHARS = 1900;
@@ -148,10 +149,7 @@ export function ChatPanel({ config, onClose }: { config: ChatConfig; onClose: ()
     try {
       await streamChat(
         { messages: recent, page: pathname, sessionId: state.sessionId },
-        {
-          onDelta: (delta) => patchLast((m) => ({ ...m, content: m.content + delta })),
-          onSources: (sources) => patchLast((m) => ({ ...m, sources })),
-        },
+        { onDelta: (delta) => patchLast((m) => ({ ...m, content: m.content + delta })) },
         controller.signal,
       );
     } catch (err) {
@@ -272,25 +270,6 @@ export function ChatPanel({ config, onClose }: { config: ChatConfig; onClose: ()
                   <Answer text={m.content} />
                 </div>
               )}
-              {m.sources && m.sources.length > 0 && (
-                <div className="mt-2 flex flex-wrap items-center gap-1.5 text-xs">
-                  <span className="inline-flex items-center gap-1 font-medium text-slate-500">
-                    <BookOpen aria-hidden className="size-3.5" /> Surse:
-                  </span>
-                  {m.sources.map((s, j) => {
-                    const url = s.url ? chatUrl(s.url) : "";
-                    return url ? (
-                      <SmartLink key={j} href={toSitePath(url)} className="rounded-full bg-white px-2.5 py-1 text-navy-700 ring-1 ring-slate-200 hover:ring-brand-500">
-                        {s.title}
-                      </SmartLink>
-                    ) : (
-                      <span key={j} className="rounded-full bg-white px-2.5 py-1 text-slate-600 ring-1 ring-slate-200">
-                        {s.title}
-                      </span>
-                    );
-                  })}
-                </div>
-              )}
             </div>
           ),
         )}
@@ -324,7 +303,7 @@ export function ChatPanel({ config, onClose }: { config: ChatConfig; onClose: ()
           )}
         </div>
         <p className="mt-2 px-1 text-[11px] leading-snug text-slate-500">
-          Asistentul AI poate greși; verificați informațiile importante. Mesajele sunt procesate de OpenAI, vezi{" "}
+          Asistentul AI poate greși. Vezi{" "}
           <SmartLink href="/politica-de-confidentialitate" className="underline hover:text-slate-700">
             politica de confidențialitate
           </SmartLink>

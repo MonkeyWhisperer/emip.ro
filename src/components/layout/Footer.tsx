@@ -113,9 +113,11 @@ export function Footer() {
         </div>
       </Container>
 
-      {/* data-footer-bar: the floating chat button rises above this bar while it is in view. */}
-      <div data-footer-bar className="border-t border-white/10">
-        <Container className="flex flex-col gap-6 py-8 lg:flex-row lg:items-center lg:justify-between">
+      {/* pb-24 keeps the legal links clear of the floating chat button (fixed bottom right, it ends
+          76px above the window's edge) once the page is scrolled to the end; from 2xl the side
+          margin is wider than the button. */}
+      <div className="border-t border-white/10">
+        <Container className="flex flex-col gap-6 pb-24 pt-8 lg:flex-row lg:items-center lg:justify-between 2xl:pb-8">
           <div className="space-y-1 text-xs text-slate-300/80 xl:w-[var(--footer-lead)]">
             <p>© {new Date().getFullYear()} Platforma eMIP. Toate drepturile rezervate.</p>
             <p>Denumirea eMIP și logo-ul eMIP sunt mărci înregistrate ® ale EMIP SRL, sub licență OSIM.</p>
