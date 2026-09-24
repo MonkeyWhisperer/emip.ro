@@ -9,17 +9,14 @@ export function Purpose() {
       <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
         <div className="space-y-6">
           {purpose.items.map(({ icon: Icon, title, text }) => (
-            <article
-              key={title}
-              className="flex flex-col gap-5 rounded-2xl border border-slate-200 p-6 sm:flex-row sm:p-8"
-            >
-              <div className="flex size-12 shrink-0 items-center justify-center rounded-xl bg-navy-900 text-brand-400">
-                <Icon aria-hidden className="size-6" />
-              </div>
-              <div>
+            <article key={title} className="rounded-2xl border border-slate-200 p-6 sm:p-8">
+              <div className="flex items-center gap-4">
+                <div className="flex size-12 shrink-0 items-center justify-center rounded-xl bg-navy-900 text-brand-400">
+                  <Icon aria-hidden className="size-6" />
+                </div>
                 <h2 className="text-2xl font-bold tracking-tight">{title}</h2>
-                <p className="mt-3 text-lg leading-relaxed text-slate-600">{text}</p>
               </div>
+              <p className="mt-4 text-lg leading-relaxed text-slate-600">{text}</p>
             </article>
           ))}
         </div>

@@ -117,9 +117,12 @@ redirect (`src/router.tsx`). Old English pages go to their Romanian equivalent w
   if the domain changes, update `public/robots.txt` too.
 - Pages that don't exist (unknown paths, unpublished or missing posts, unknown categories, blog pages past the
   last one, unknown service pages) get the app's 404 view **with status 404**.
-- The HTML of posts and static pages carries a server-rendered `<title>`, description, canonical URL and, for
-  posts, Open Graph tags with an absolute `og:image`, so link previews work without JavaScript. These tags are
-  marked `data-server-meta`; the web app removes them at startup and renders its own. Static page titles and
+- The HTML of posts and static pages carries a server-rendered `<title>`, description, canonical URL, Open Graph
+  tags (`og:type` `article` with publication dates for posts) and a `summary_large_image` card, so link previews
+  work without JavaScript. `og:image` is the post's cover, or `public/og-image.jpg` (1200×630) for pages without
+  one. The home page adds schema.org JSON-LD for the organisation and the site, and posts add a `BlogPosting`
+  with its breadcrumb (`shared/seo.ts`, used by both the server and `PageMeta`). These tags are marked
+  `data-server-meta`; the web app removes them at startup and renders its own. Static page titles and
   descriptions come from `server/generated/site-pages.json` (`npm run knowledge:export`).
 - `server/siteRoutes.ts` mirrors `src/router.tsx`, the service slugs in `src/content/servicii.ts` and the blog
   page size: when a route or service page is added, add it there too.

@@ -9,6 +9,7 @@ import { PageMeta } from "../../components/ui/PageMeta";
 import { Container, Section } from "../../components/ui/Section";
 import { SocialIcon } from "../../components/ui/SocialIcon";
 import { formatDate } from "../../lib/text";
+import { postJsonLd } from "../../../shared/seo";
 
 export async function postLoader({ params }: LoaderFunctionArgs) {
   try {
@@ -73,7 +74,14 @@ export function PostPage() {
 
   return (
     <>
-      <PageMeta title={post.title} description={post.description} image={post.cover ?? undefined} />
+      <PageMeta
+        title={post.title}
+        description={post.description}
+        image={post.cover ?? undefined}
+        imageAlt={post.coverAlt ?? undefined}
+        article={{ published: post.date, modified: post.updated ?? post.date }}
+        jsonLd={(origin) => postJsonLd(post, categories.find((c) => c.slug === post.categories[0]), origin)}
+      />
 
       <article>
         {post.status === "draft" && (

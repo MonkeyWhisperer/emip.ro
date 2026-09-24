@@ -25,14 +25,14 @@ export function FundedProjects() {
         <div className="mt-10 grid gap-10 lg:grid-cols-[3fr_2fr]">
           <ul className="space-y-8">
             {fundedProjects.reasons.map(({ icon: Icon, title, text }) => (
-              <li key={title} className="flex gap-4">
-                <div className="flex size-10 shrink-0 items-center justify-center rounded-lg bg-brand-100 text-brand-800">
-                  <Icon aria-hidden className="size-5" />
-                </div>
-                <div>
+              <li key={title}>
+                <div className="flex items-center gap-4">
+                  <div className="flex size-10 shrink-0 items-center justify-center rounded-lg bg-brand-100 text-brand-800">
+                    <Icon aria-hidden className="size-5" />
+                  </div>
                   <h4 className="font-semibold">{title}</h4>
-                  <p className="mt-1 leading-relaxed text-slate-600">{text}</p>
                 </div>
+                <p className="mt-3 leading-relaxed text-slate-600">{text}</p>
               </li>
             ))}
           </ul>

@@ -8,9 +8,10 @@ export function ServiceFacts({ facts, className = "" }: { facts: ServiceFact[]; 
     <dl className={`flex flex-wrap gap-x-8 gap-y-4 ${className}`}>
       {facts.map(({ icon: Icon, label, value }) => (
         // A <div> inside a <dl> may only hold <dt>/<dd>, so the icon sits inside the <dt>.
-        <div key={label} className="relative pl-8">
-          <dt className="text-xs font-semibold uppercase tracking-wider text-slate-500">
-            <Icon aria-hidden className="absolute left-0 top-0.5 size-5 text-brand-700" />
+        // The icon is centred on the label line.
+        <div key={label} className="pl-8">
+          <dt className="relative text-xs font-semibold uppercase tracking-wider text-slate-500">
+            <Icon aria-hidden className="absolute -left-8 top-1/2 size-5 -translate-y-1/2 text-brand-700" />
             {label}
           </dt>
           <dd className="mt-0.5 font-semibold text-navy-950">{value}</dd>

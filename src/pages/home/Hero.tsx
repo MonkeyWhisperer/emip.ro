@@ -1,20 +1,24 @@
-import { hero } from "../../content/home";
+import { hero, type HeroStat } from "../../content/home";
 import { useCountUp } from "../../hooks/useCountUp";
 import { ButtonLink } from "../../components/ui/ButtonLink";
 import { Container } from "../../components/ui/Section";
 import heroImage from "../../assets/hero.webp";
 
-function Stat({ value, suffix, label }: (typeof hero.stats)[number]) {
+function Stat({ value, prefix, suffix, label, countUp }: HeroStat) {
   const { ref, value: current } = useCountUp<HTMLDivElement>(value);
   return (
-    <div ref={ref} className="px-6 py-5 text-center sm:text-left">
+    // Each cell draws its top and left border; the <dl>'s -m-px hides those on the outer edges.
+    <div ref={ref} className="border-l border-t border-white/10 px-6 py-5 text-center sm:text-left sm:max-lg:last:col-span-2">
       <dt className="sr-only">{label}</dt>
       <dd>
-        <span className="block text-4xl font-bold tabular-nums text-white" aria-hidden>
-          {current}
+        {/* 30px between lg and xl, where five columns leave "Din 2018" too little room at 36px. */}
+        <span className="block text-4xl font-bold tabular-nums text-white lg:max-xl:text-3xl" aria-hidden>
+          {prefix}
+          {countUp === false ? value : current}
           {suffix}
         </span>
         <span className="sr-only">
+          {prefix}
           {value}
           {suffix}
         </span>
@@ -64,11 +68,14 @@ export function Hero() {
           </div>
         </div>
 
-        <dl className="mt-16 grid max-w-3xl divide-white/10 rounded-2xl border border-white/10 bg-navy-950/60 backdrop-blur-sm max-sm:divide-y sm:grid-cols-3 sm:divide-x">
-          {hero.stats.map((stat) => (
-            <Stat key={stat.label} {...stat} />
-          ))}
-        </dl>
+        {/* One row of five from lg; two columns below that, the last stat spanning both. */}
+        <div className="mt-16 max-w-3xl overflow-hidden rounded-2xl border border-white/10 bg-navy-950/60 backdrop-blur-sm lg:max-w-none">
+          <dl className="-m-px grid sm:grid-cols-2 lg:grid-cols-5">
+            {hero.stats.map((stat) => (
+              <Stat key={stat.label} {...stat} />
+            ))}
+          </dl>
+        </div>
       </Container>
     </section>
   );

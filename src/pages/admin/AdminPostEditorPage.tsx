@@ -749,14 +749,14 @@ function PostEditor({ post, categories, editorKey }: { post: Post | null; catego
                 checked={form.featured}
                 onChange={(v) => update("featured", v)}
                 label="Articol recomandat"
-                hint="Marchează articolul ca recomandat (featured)."
+                hint="Apare în cardul mare de pe prima pagină a blogului, înaintea articolelor mai noi. Fără articol recomandat, cardul mare arată cel mai nou articol."
               />
               <Toggle
                 id={fid("pinned")}
                 checked={form.pinned}
                 onChange={(v) => update("pinned", v)}
                 label="Fixat sus"
-                hint="Marchează articolul ca fixat în partea de sus a listei (pinned)."
+                hint="Apare primul în listă, înaintea articolelor mai noi. Celelalte articole sunt ordonate după dată, de la cel mai nou."
               />
             </div>
 

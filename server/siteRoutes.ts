@@ -2,6 +2,7 @@ import { existsSync, readFileSync, statSync } from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import type { Category, Post } from "../shared/blog.ts";
+import { DEFAULT_SHARE_IMAGE, SITE_NAME, homeJsonLd, jsonLdText, postJsonLd } from "../shared/seo.ts";
 import { getPostBySlug, listCategories, listPosts } from "./db.ts";
 
 // The web app's public routes, as the server needs them for soft-404 status codes, link-preview
@@ -11,7 +12,6 @@ import { getPostBySlug, listCategories, listPosts } from "./db.ts";
 
 /** Public site URL for absolute links (sitemap, canonical, og:url, og:image). */
 export const SITE_URL = (process.env.SITE_URL ?? "https://www.emip.ro").replace(/\/+$/, "");
-export const SITE_NAME = "Platforma eMIP";
 
 /** Static pages; `sitemap: false` for utility or ended pages that should not be listed. */
 const STATIC_PAGES: { path: string; sitemap?: false; title?: string }[] = [
@@ -233,13 +233,28 @@ const fullTitle = (title: string) => (title === SITE_NAME ? title : `${title} | 
 
 /**
  * <head> tags for link previews and crawlers that do not run JavaScript. Every tag carries
- * data-server-meta: the web app removes them at startup and renders its own per page.
+ * data-server-meta: the web app removes them at startup and renders its own per page (PageMeta,
+ * which mirrors this function).
  */
 export function serverMetaTags(route: RouteMatch | null): string {
   const tags: string[] = [];
   const attr = "data-server-meta";
   const meta = (key: "name" | "property", name: string, content: string) =>
     tags.push(`<meta ${attr} ${key}="${name}" content="${htmlEscape(content)}" />`);
+  const jsonLd = (data: Record<string, unknown>) => tags.push(`<script ${attr} type="application/ld+json">${jsonLdText(data)}</script>`);
+  /** og:image, the post's cover or the site's default share image, and the large-image card. */
+  const image = (cover: string | null, coverAlt: string | null) => {
+    meta("name", "twitter:card", "summary_large_image");
+    if (cover) {
+      meta("property", "og:image", absoluteUrl(cover));
+      if (coverAlt) meta("property", "og:image:alt", coverAlt);
+      return;
+    }
+    meta("property", "og:image", absoluteUrl(DEFAULT_SHARE_IMAGE.path));
+    meta("property", "og:image:width", String(DEFAULT_SHARE_IMAGE.width));
+    meta("property", "og:image:height", String(DEFAULT_SHARE_IMAGE.height));
+    meta("property", "og:image:alt", DEFAULT_SHARE_IMAGE.alt);
+  };
   const head = (title: string | undefined, description: string | undefined, canonical: string | undefined) => {
     if (title) {
       tags.push(`<title ${attr}>${htmlEscape(fullTitle(title))}</title>`);
@@ -261,15 +276,22 @@ export function serverMetaTags(route: RouteMatch | null): string {
   } else if (route.kind === "post") {
     const { post } = route;
     head(post.title, post.description || undefined, `/post/${encodeURIComponent(post.slug)}`);
-    if (post.cover) {
-      meta("property", "og:image", absoluteUrl(post.cover));
-      if (post.coverAlt) meta("property", "og:image:alt", post.coverAlt);
-    }
+    meta("property", "og:type", "article");
+    meta("property", "article:published_time", post.date);
+    meta("property", "article:modified_time", post.updated ?? post.date);
+    image(post.cover, post.coverAlt);
+    const category = listCategories().find((c) => c.slug === post.categories[0]);
+    jsonLd(postJsonLd(post, category, SITE_URL));
   } else if (route.kind === "blog") {
     const { category } = route;
     head(category ? `${category.label} | Blog` : "Blog", category?.description || BLOG_DESCRIPTION, route.path);
+    meta("property", "og:type", "website");
+    image(null, null);
   } else if (route.kind === "page") {
     head(route.title, route.description, route.path);
+    meta("property", "og:type", "website");
+    image(null, null);
+    if (route.path === "/") jsonLd(homeJsonLd(SITE_URL));
   }
   return tags.join("\n    ");
 }

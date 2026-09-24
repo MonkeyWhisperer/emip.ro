@@ -40,6 +40,7 @@ import adrIcon from "../assets/certificari/adr.webp";
 
 type IconCard = { icon: LucideIcon; title: string; text: string };
 type Cta = { label: string; href: string };
+export type HeroStat = { value: number; prefix?: string; suffix?: string; label: string; countUp?: false };
 
 export const hero = {
   eyebrow: "Ecosistem de soluții de digitalizare a afacerii",
@@ -49,14 +50,14 @@ export const hero = {
   primary: { label: "Accesează cont demo", href: APP_URL } satisfies Cta,
   primaryNote: "Cu proiecte demo virtualizate.",
   secondary: { label: "Planifică un workshop", href: "/servicii" } satisfies Cta,
-  // The live site animates these from 0. "Proiecte gestionate" never shows a real
-  // number there, so it is replaced by the 10x claim used further down the page.
-  // TODO: swap in the real number of managed projects once confirmed.
+  // The numbers count up from 0 when the bar scrolls into view; a year (`countUp: false`) doesn't.
   stats: [
+    { value: 300, suffix: "+", label: "Proiecte finalizate" },
+    { value: 2018, prefix: "Din ", label: "Operaționali în digitalizarea proiectelor", countUp: false },
     { value: 90, suffix: "%", label: "Reducere timp raportare" },
     { value: 10, suffix: "x", label: "Mai multe proiecte în paralel" },
     { value: 100, suffix: "%", label: "Conformitate MIPE" },
-  ],
+  ] satisfies HeroStat[],
 };
 
 export const benefits = {
@@ -197,11 +198,11 @@ export const arch = {
     "Certificat propriu pentru semnătură electronică",
     "Disponibil pe App Store și Google Play",
   ],
-  // The product tab on /preturi; the demo button covers the app (its login page lists the
-  // eMIP Arch demo accounts: Admin Arhivă, Client).
-  primary: { label: "Descoperă eMIP Arch", href: "/preturi#arch" } satisfies Cta,
-  secondary: { label: "Accesează cont demo", href: APP_URL } satisfies Cta,
-  secondaryNote: "Cu arhive demo virtualizate.",
+  // Demo first, as in the hero; the app's login page lists the eMIP Arch demo accounts (Admin
+  // Arhivă, Client). The second button goes to the product tab on /preturi.
+  primary: { label: "Accesează cont demo", href: APP_URL } satisfies Cta,
+  primaryNote: "Cu arhive demo virtualizate.",
+  secondary: { label: "Descoperă eMIP Arch", href: "/preturi#arch" } satisfies Cta,
   items: [
     {
       icon: Archive,

@@ -10,6 +10,7 @@ import { Newsletter } from "./Newsletter";
 import { Trust } from "./Trust";
 import { UseCases } from "./UseCases";
 import { PageMeta } from "../../components/ui/PageMeta";
+import { homeJsonLd } from "../../../shared/seo";
 
 export function HomePage() {
   return (
@@ -17,6 +18,7 @@ export function HomePage() {
       <PageMeta
         title="Platforma eMIP"
         description="Platforma #1 pentru implementarea proiectelor PEO & PIDS. Conformitate MIPE, raportare automată și gestionarea proiectelor, echipelor și bugetelor dintr-o singură platformă."
+        jsonLd={homeJsonLd}
       />
       <Hero />
       <Benefits />

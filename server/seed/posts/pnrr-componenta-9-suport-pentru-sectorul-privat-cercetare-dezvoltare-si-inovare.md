@@ -8,7 +8,6 @@ author: "Editor eMIP"
 readingTime: 2
 cover: "/media/blog/pnrr-componenta-9-suport-pentru-sectorul-privat-cercetare-dezvoltare-si-inovare/3cfa0e-9721aca2dae143ddbb969cc099aae152.webp"
 categories: ["digitalizare"]
-featured: true
 ---
 
 PNRR va permite transformarea digitală a societății romanești, prin  finanțarea proiectării și dezvoltării infrastructurii  digitale, a  aplicatiilor software necesare digitalizării proceselor din cadrul  administratiei si al mediului de afaceri privat, resprectiv printr-un amplu proces de instruire si formare profesionale in domeniul IT&C.
