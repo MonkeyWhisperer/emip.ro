@@ -101,3 +101,40 @@ export const router = createBrowserRouter([
     ],
   },
 ]);
+
+type Connection = { saveData?: boolean; effectiveType?: string };
+
+/**
+ * Once the page the visitor opened has fully loaded (its route's code and data, and the window's
+ * load event) and the browser is idle, fetch the code of all the other site pages, so a link shows
+ * its page at once. The chunks are immutable files, so the browser's cache also keeps them for
+ * later visits. Only the code: images and blog data still load when their page opens. Skipped in
+ * the admin panel, and for visitors who asked to save data or are on a 2G connection.
+ */
+export function prefetchSitePages() {
+  if (location.pathname.startsWith("/admin")) return;
+  const connection = (navigator as Navigator & { connection?: Connection }).connection;
+  if (connection?.saveData || connection?.effectiveType?.includes("2g")) return;
+
+  const windowLoaded = new Promise<void>((resolve) => {
+    if (document.readyState === "complete") resolve();
+    else addEventListener("load", () => resolve(), { once: true });
+  });
+  const routeLoaded = new Promise<void>((resolve) => {
+    if (router.state.initialized) return resolve();
+    const unsubscribe = router.subscribe((state) => {
+      if (!state.initialized) return;
+      unsubscribe();
+      resolve();
+    });
+  });
+  const prefetch = () => {
+    for (const route of siteRoutes) {
+      if (typeof route.lazy === "function") route.lazy().catch(() => {}); // loaded again on navigation
+    }
+  };
+  Promise.all([windowLoaded, routeLoaded]).then(() => {
+    if ("requestIdleCallback" in window) requestIdleCallback(prefetch, { timeout: 3000 });
+    else setTimeout(prefetch, 500);
+  });
+}

@@ -50,7 +50,9 @@ export function ChatLauncher() {
     <>
       {/* A round icon button, so it never hides page controls (booking buttons, footer links);
           the label slides out on hover and keyboard focus. The mint ring keeps it visible over
-          the navy header, footer and dark sections. The label stays in the accessible name.
+          the navy header, footer and dark sections. The label stays in the accessible name. The
+          button sets the label's text size: the collapsed label's line must be no taller than the
+          20px icon, or the closed button becomes an oval (a 16px/24px line made it 52×56).
           It stays put at the end of the page too; the footer leaves room for it under the legal links. */}
       {!open && (
         <button
@@ -64,7 +66,7 @@ export function ChatLauncher() {
           onPointerEnter={ensurePanel}
           onFocus={ensurePanel}
           aria-haspopup="dialog"
-          className={`group fixed bottom-5 right-5 z-[55] flex items-center rounded-full bg-navy-950 p-4 text-white shadow-xl shadow-navy-950/30 ring-1 ring-brand-400/40 transition-[background-color,box-shadow] hover:bg-navy-800 hover:ring-2 hover:ring-brand-400/80 focus-visible:ring-brand-400/80 ${opened ? "" : "animate-fade-up"}`}
+          className={`group fixed bottom-5 right-5 z-[55] flex items-center rounded-full bg-navy-950 p-4 text-sm font-semibold text-white shadow-xl shadow-navy-950/30 ring-1 ring-brand-400/40 transition-[background-color,box-shadow] hover:bg-navy-800 hover:ring-2 hover:ring-brand-400/80 focus-visible:ring-brand-400/80 ${opened ? "" : "animate-fade-up"}`}
         >
           <Sparkles aria-hidden className="size-5 shrink-0 text-brand-400" />
           {/* The label opens by animating a grid column from 0fr to 1fr, i.e. to exactly its text's
@@ -74,7 +76,7 @@ export function ChatLauncher() {
               shut, opening starts at once (the hover state's delay). */}
           <span className="grid grid-cols-[0fr] opacity-0 transition-[grid-template-columns,opacity] delay-200 duration-500 ease-in-out group-hover:grid-cols-[1fr] group-hover:opacity-100 group-hover:delay-0 group-focus-visible:grid-cols-[1fr] group-focus-visible:opacity-100 group-focus-visible:delay-0">
             <span className="min-w-0 overflow-hidden whitespace-nowrap">
-              <span className="pl-2 text-sm font-semibold">Întrebați asistentul</span>
+              <span className="pl-2">Întrebați asistentul</span>
             </span>
           </span>
         </button>
