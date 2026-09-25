@@ -28,30 +28,40 @@ type Props = {
 };
 
 export function ServiceCard({ service, headingLevel: Heading = "h2" }: Props) {
-  const { icon: Icon, slug, title, tagline, badge, facts, bookingSubject } = service;
+  const { icon: Icon, slug, title, image, badge, facts, bookingSubject } = service;
   return (
     <article className="flex flex-col rounded-2xl border border-slate-200 bg-white p-6 transition-shadow hover:shadow-lg hover:shadow-navy-900/5 sm:p-8">
-      {/* The badge follows the heading in the DOM, so the text version of the page (screen readers,
-          the AI assistant's knowledge export) attaches it to this service, not the previous card.
-          `order` still shows it top right, next to the icon; the heading wraps to its own row. */}
-      <div className="flex flex-wrap items-start justify-between gap-x-4">
-        <div className="flex size-12 items-center justify-center rounded-xl bg-navy-900 text-brand-400">
+      {/* The title beside the icon. The badge follows the heading in the DOM, so the text version of
+          the page (screen readers, the AI assistant's knowledge export) attaches it to this service,
+          not the previous card; it sits after the title when both fit on one line, else under it. */}
+      <div className="flex items-center gap-4">
+        <div className="flex size-12 shrink-0 items-center justify-center rounded-xl bg-navy-900 text-brand-400">
           <Icon aria-hidden className="size-6" />
         </div>
-        <Heading className="order-last mt-6 w-full text-2xl font-bold tracking-tight">
-          <Link to={servicePath(slug)} className="hover:text-brand-700">
-            {title}
-          </Link>
-        </Heading>
-        {badge && (
-          <p className="rounded-full bg-brand-50 px-3 py-1 text-xs font-semibold text-brand-800">{badge}</p>
-        )}
+        <div className="flex min-w-0 flex-1 flex-wrap items-center justify-between gap-x-4 gap-y-1.5">
+          <Heading className="text-2xl font-bold tracking-tight">
+            <Link to={servicePath(slug)} className="hover:text-brand-700">
+              {title}
+            </Link>
+          </Heading>
+          {badge && (
+            <p className="rounded-full bg-brand-50 px-3 py-1 text-xs font-semibold text-brand-800">{badge}</p>
+          )}
+        </div>
       </div>
-      <p className="mt-2 leading-relaxed text-slate-600">{tagline}</p>
 
-      {/* Pushed to the bottom so facts and buttons line up across cards of different length. */}
+      {/* Pushed to the bottom so image, facts and buttons line up across cards whose headings differ
+          in height (a badge that wraps under its title). */}
       <div className="mt-auto pt-6">
-        <ServiceFacts facts={facts} className="border-t border-slate-200 pt-6" />
+        <img
+          src={image.src}
+          alt={image.alt}
+          width={800}
+          height={450}
+          loading="lazy"
+          className="aspect-[16/9] w-full rounded-xl bg-navy-900 object-cover"
+        />
+        <ServiceFacts facts={facts} className="mt-6 border-t border-slate-200 pt-6" />
       </div>
 
       <div className="flex flex-col gap-3 pt-8 sm:flex-row">

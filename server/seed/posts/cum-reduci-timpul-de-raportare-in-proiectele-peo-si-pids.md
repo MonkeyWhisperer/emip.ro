@@ -22,7 +22,7 @@ Raportarea manuală în proiectele cu fonduri europene consumă în medie 15-20 
 ## ⚡ Soluția eMIP: Automatizare End-to-End pentru Raportare
 
 - **Calendar Expert integrat** - Orele se completează zilnic de experți, nu retroactiv la final de lună
-- **Validare Manager** - Un singur click pentru aprobare, audit trail complet pentru verificări
+- **Validare Manager** - Un singur click pentru aprobare, pistă de audit completă pentru verificări
 - **Generare Rapoarte Automată** - Raport complet în format MIPE, gata de upload în MySMIS
 - **Arhivă MySMIS** - Structură de foldere pregătită pentru încărcare directă la finanțator
 - **Notificări automate** - Alerte in Dashboard pentru taskuri restante de completat

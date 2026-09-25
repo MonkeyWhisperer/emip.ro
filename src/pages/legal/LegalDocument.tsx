@@ -238,7 +238,7 @@ export function LegalDocument({ doc, source }: Props) {
           <article className="mt-10 min-w-0 lg:mt-0">
             {doc.notice && (
               <div className="mb-10 flex gap-3 rounded-2xl border border-brand-200 bg-brand-50 p-5">
-                <Info aria-hidden className="mt-0.5 size-5 shrink-0 text-brand-700" />
+                <Info aria-hidden className="mt-1.5 size-5 shrink-0 text-brand-700" />
                 <Markdown source={doc.notice} className="prose-sm min-w-0" />
               </div>
             )}

@@ -1,5 +1,7 @@
 import type { LucideIcon } from "lucide-react";
-import { Clock, GraduationCap, MapPin, Presentation, Video, Wallet } from "lucide-react";
+import { Clock, GraduationCap, Presentation, Video, Wallet } from "lucide-react";
+import workshopImage from "../assets/servicii/workshop-demo.svg";
+import mentoringImage from "../assets/servicii/mentorat-plan-afaceri.svg";
 
 export type ServiceFact = { icon: LucideIcon; label: string; value: string };
 
@@ -10,7 +12,10 @@ export type Service = {
   slug: string;
   icon: LucideIcon;
   title: string;
+  /** Subtitle on the service's own page (the cards show the image instead). */
   tagline: string;
+  /** Illustration on the service card: a 16:9 SVG drawn for the site (src/assets/servicii). */
+  image: { src: string; alt: string };
   /** Small label shown next to the title, e.g. "Disponibil online". */
   badge?: string;
   facts: ServiceFact[];
@@ -35,10 +40,14 @@ export const services: Service[] = [
     icon: Presentation,
     title: "Workshop DEMO prezentare",
     tagline: "Derularea unui workshop demonstrativ privind operarea platformei eMIP",
+    image: {
+      src: workshopImage,
+      alt: "Ilustrație: platforma eMIP prezentată într-o întâlnire online, cu participanții în apel video",
+    },
     facts: [
       { icon: Clock, label: "Durată", value: "1 oră" },
       { icon: Wallet, label: "Preț", value: "Gratuit" },
-      { icon: MapPin, label: "Locație", value: "Strada Tudor Arghezi 6, Alba Iulia" },
+      { icon: Video, label: "Desfășurare", value: "Online via ZOOM" },
     ],
     bookingSubject: "Workshop demo - prezentare platformă",
     metaDescription:
@@ -56,11 +65,14 @@ export const services: Service[] = [
     icon: GraduationCap,
     title: "Mentorat prin eMIP Plan Afaceri",
     tagline: "Program de Tutorat Online – Antreprenoriat cu Experiență",
-    badge: "Disponibil online",
+    image: {
+      src: mentoringImage,
+      alt: "Ilustrație: sesiune de mentorat online lângă un plan de afaceri cu secțiuni bifate și un grafic de creștere",
+    },
     // The live page shows no price for this service.
     facts: [
       { icon: Clock, label: "Durată", value: "1 oră" },
-      { icon: Video, label: "Locație", value: "Online via ZOOM" },
+      { icon: Video, label: "Desfășurare", value: "Online via ZOOM" },
     ],
     bookingSubject: "Mentorat prin eMIP Plan Afaceri",
     metaDescription:

@@ -22,10 +22,12 @@ export const footerNav: NavItem[] = [
   { label: "Prețuri și Tarife", href: "/preturi" },
   { label: "Servicii", href: "/servicii" },
   { label: "Librărie", href: "/librarie" },
-  { label: "Certificări", href: "/certificari" },
   { label: "Blog", href: "/blog" },
   { label: "Contact", href: "/contact" },
 ];
+
+/** Pages in no menu that the site search must still find (/certificari is linked from the home page and Contact). */
+export const unlistedPages: NavItem[] = [{ label: "Certificări", href: "/certificari" }];
 
 export const legalNav: NavItem[] = [
   { label: "Termeni și condiții", href: "/termeni-si-conditii-legale" },

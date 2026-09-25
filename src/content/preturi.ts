@@ -33,8 +33,6 @@ type Cta = { label: string; href: string };
 export type Price = {
   amount: string;
   unit: string;
-  /** Shows a "Gratuit" badge next to the amount. */
-  free?: boolean;
 };
 
 export type PriceItem = {
@@ -71,8 +69,6 @@ export const intro = {
   tabsLabel: "Produse eMIP",
   brand: "eMIP®",
   advantagesLabel: "Avantaje",
-  /** Badge on 0 € prices (the live page writes "0 € (GRATUIT)"). */
-  freeLabel: "Gratuit",
 };
 
 export const meta = {
@@ -110,7 +106,7 @@ export const products: Product[] = [
           {
             icon: Eye,
             title: "Supraveghere / sprijin Echipă",
-            price: { amount: "0", unit: "€", free: true },
+            price: { amount: "0", unit: "€" },
             text: "User cu rol Manager în afara funcțiilor echipei de proiect. Se acordă gratuit un utilizator pentru fiecare proiect.",
             note: "Gestionează activitatea echipei fără a-și completa calendar propriu",
           },
@@ -123,7 +119,7 @@ export const products: Product[] = [
           {
             icon: Settings2,
             title: "Virtualizare Proiect",
-            price: { amount: "0", unit: "€", free: true },
+            price: { amount: "0", unit: "€" },
             text: "Setup inițial: introducerea datelor din cererea de finanțare și configurarea platformei.",
             note: "Activități, parteneri, funcții, ore bugetate, rezultate, indicatori - realizat de echipa eMIP",
           },
@@ -227,7 +223,7 @@ export const products: Product[] = [
           {
             icon: Smartphone,
             title: "Client Mobil",
-            price: { amount: "0", unit: "€", free: true },
+            price: { amount: "0", unit: "€" },
             text: "Clientul eMIP Arch este publicat în App Store și Google Play și este oferit gratuit utilizatorilor.",
             note: "Aplicațiile sunt verificate și auditate de Apple și Google",
             stores: {

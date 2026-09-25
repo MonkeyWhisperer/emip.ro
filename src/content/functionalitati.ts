@@ -185,7 +185,7 @@ export const features: Feature[] = [
       "Notificări și alerte pentru echipă",
       "Dashboard personalizat per rol",
       "Acces multi-utilizator simultan",
-      "Audit trail complet pentru toate acțiunile din calendar expert",
+      "Pistă de audit completă pentru toate acțiunile din calendar expert",
     ],
     orbit: [KeyRound, Bell, LayoutDashboard, FileClock],
   },

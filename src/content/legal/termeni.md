@@ -103,7 +103,7 @@ Măsurile tehnice și organizatorice implementate includ:
 - Backup zilnic automat prin Microsoft Azure VM Backup (minimum 14 copii)
 - Disaster Recovery prin Azure Site Recovery
 - Monitorizare continuă prin Microsoft Defender for Cloud
-- Log-uri de acces și audit trail pentru toate operațiunile sensibile
+- Log-uri de acces și pistă de audit pentru toate operațiunile sensibile
 - Stocarea datelor exclusiv în Centre de Date Microsoft Azure din Uniunea Europeană
 
 ### 1.5. Principii Fundamentale Respectate de Platforma eMIP
@@ -286,7 +286,7 @@ Pe toată durata de derulare a Contractului de Licențiere și a perioadei de im
 - Stocare primară pe SSD Pro/Enterprise (acces rapid)
 - Backup zilnic automat (minimum 14 copii de siguranță)
 - Disaster Recovery prin Azure Site Recovery (replică în alt centru de date UE)
-- Log-uri de acces și audit trail (păstrate 30 de zile)
+- Log-uri de acces și pistă de audit (păstrate 30 de zile)
 - Indexare completă pentru căutare rapidă în conținut
 
 ### 5.2. Zona de Stocare „Caldă” (implementare + 1 an după finalizare)

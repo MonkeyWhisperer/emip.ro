@@ -1,3 +1,4 @@
+import type { ReactNode } from "react";
 import { Link } from "react-router";
 import { Clock, Newspaper } from "lucide-react";
 import { postPath, type PostSummary } from "../../lib/blog";
@@ -52,14 +53,31 @@ export function PostCard({ post, categoryLabel, featured = false }: Props) {
             {post.description}
           </p>
         )}
-        <p className="mt-auto flex flex-wrap items-center gap-x-2 gap-y-1 pt-5 text-sm text-slate-500">
-          <time dateTime={post.date}>{formatDate(post.date)}</time>
-          <span aria-hidden>·</span>
-          <Clock aria-hidden className="size-3.5" />
-          {post.readingTime} min de citit
-        </p>
+        <div className="mt-auto pt-5">
+          <PostMeta className="gap-x-2 text-slate-500">
+            <time dateTime={post.date}>{formatDate(post.date)}</time>
+            <span aria-hidden>·</span>
+            <Clock aria-hidden className="size-4" />
+            <span>{post.readingTime} min de citit</span>
+          </PostMeta>
+        </div>
       </div>
     </article>
+  );
+}
+
+/**
+ * A post's date / reading-time row (cards and the post header). Every text in it is trimmed to its
+ * lowercase letters (x-height to baseline), so centring the row centres the 16px clock on them,
+ * not on the line box, and all the texts keep one baseline. The row is mostly lowercase: centred
+ * on the line box or on the capitals, the clock sat 1–2px high next to it. min-h-5 keeps the
+ * untrimmed row height. Text must sit in an element (a bare text node can't be trimmed).
+ */
+export function PostMeta({ className = "", children }: { className?: string; children: ReactNode }) {
+  return (
+    <p className={`flex min-h-5 flex-wrap items-center gap-y-2 text-sm *:[text-box:trim-both_ex_alphabetic] ${className}`}>
+      {children}
+    </p>
   );
 }
 

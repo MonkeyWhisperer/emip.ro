@@ -20,7 +20,7 @@ export function ServiciiPage() {
         </div>
 
         <p className="mx-auto mt-10 flex max-w-2xl gap-2 text-sm text-slate-500">
-          <Info aria-hidden className="mt-0.5 size-4 shrink-0" />
+          <Info aria-hidden className="mt-1 size-4 shrink-0" />
           {bookingNote}
         </p>
       </Section>

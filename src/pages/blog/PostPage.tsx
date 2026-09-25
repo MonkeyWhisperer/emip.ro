@@ -3,7 +3,7 @@ import { Link, data, useLoaderData, type LoaderFunctionArgs } from "react-router
 import { ArrowLeft, Check, Clock, EyeOff, Link2 } from "lucide-react";
 import { ApiError } from "../../lib/api";
 import { categoryPath, fetchCategories, fetchPost, fetchPosts, relatedPosts } from "../../lib/blog";
-import { PostCard, firstCategoryLabel } from "../../components/blog/PostCard";
+import { PostCard, PostMeta, firstCategoryLabel } from "../../components/blog/PostCard";
 import { Markdown } from "../../components/ui/Markdown";
 import { PageMeta } from "../../components/ui/PageMeta";
 import { Container, Section } from "../../components/ui/Section";
@@ -117,15 +117,16 @@ export function PostPage() {
             <h1 className="mt-4 text-3xl font-extrabold leading-tight tracking-tight text-white sm:text-4xl lg:text-5xl">
               {post.title}
             </h1>
-            <p className="mt-6 flex flex-wrap items-center gap-x-3 gap-y-1 text-sm text-slate-300">
+            <PostMeta className="mt-6 gap-x-3 text-slate-300">
               <span className="font-medium text-white">{post.author}</span>
               <span aria-hidden>·</span>
               <time dateTime={post.date}>{formatDate(post.date)}</time>
               <span aria-hidden>·</span>
               <span className="inline-flex items-center gap-1.5">
-                <Clock aria-hidden className="size-3.5" /> {post.readingTime} min de citit
+                <Clock aria-hidden className="size-4" />
+                <span className="[text-box:trim-both_ex_alphabetic]">{post.readingTime} min de citit</span>
               </span>
-            </p>
+            </PostMeta>
           </Container>
         </header>
 

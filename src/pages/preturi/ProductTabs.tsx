@@ -7,18 +7,13 @@ import { Section } from "../../components/ui/Section";
 function PriceCard({ icon: Icon, title, price, text, note, stores }: PriceItem) {
   return (
     <article className="flex flex-col rounded-2xl border border-slate-200 bg-white p-6 transition-shadow hover:shadow-lg hover:shadow-navy-900/5">
-      <div className="flex items-start justify-between gap-4">
-        <div className="flex size-11 items-center justify-center rounded-xl bg-navy-900 text-brand-400">
+      <div className="flex items-center gap-4">
+        <div className="flex size-11 shrink-0 items-center justify-center rounded-xl bg-navy-900 text-brand-400">
           <Icon aria-hidden className="size-5" />
         </div>
-        {price.free && (
-          <span className="rounded-full bg-brand-100 px-2.5 py-1 text-xs font-bold uppercase tracking-wider text-brand-800">
-            {intro.freeLabel}
-          </span>
-        )}
+        <h4 className="text-lg font-semibold leading-snug">{title}</h4>
       </div>
-      <h4 className="mt-5 text-lg font-semibold">{title}</h4>
-      <p className="mt-2 flex flex-wrap items-baseline gap-x-1.5">
+      <p className="mt-4 flex flex-wrap items-baseline gap-x-1.5">
         <span className="text-4xl font-extrabold tracking-tight text-navy-950">{price.amount}</span>
         <span className="text-sm font-semibold text-slate-500">{price.unit}</span>
       </p>
@@ -26,7 +21,7 @@ function PriceCard({ icon: Icon, title, price, text, note, stores }: PriceItem) 
       {note && (
         <div className="mt-auto pt-5">
           <p className="flex gap-2 border-t border-slate-100 pt-4 text-sm leading-relaxed text-slate-500">
-            <Info aria-hidden className="mt-0.5 size-4 shrink-0 text-brand-600" />
+            <Info aria-hidden className="mt-1.25 size-4 shrink-0 text-brand-600" />
             {note}
           </p>
         </div>
@@ -187,7 +182,7 @@ export function ProductTabs() {
       </div>
 
       <p className="mt-4 flex items-start gap-2 text-sm text-slate-500">
-        <Info aria-hidden className="mt-0.5 size-4 shrink-0" />
+        <Info aria-hidden className="mt-1 size-4 shrink-0" />
         {intro.vatNote}
       </p>
 

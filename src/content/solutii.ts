@@ -1,11 +1,12 @@
 import type { LucideIcon } from "lucide-react";
 import { ChartGantt, ChartPie, FileSpreadsheet, SquareKanban, Target, TrendingUp, Users } from "lucide-react";
 import { APP_URL } from "./site";
-import collaborationImage from "../assets/solutii/colaborare.webp";
-import managersImage from "../assets/solutii/manageri-proiect.webp";
-import directorsImage from "../assets/solutii/directori-executivi.webp";
-import consultancyImage from "../assets/solutii/echipe-consultanta.webp";
-import companiesImage from "../assets/solutii/companii-proiecte-complexe.webp";
+// Illustrations drawn for the site as SVG: the product's is 16:9, the personas' 4:3.
+import productImage from "../assets/solutii/emip-proiecte.svg";
+import managersImage from "../assets/solutii/manageri-proiect.svg";
+import directorsImage from "../assets/solutii/directori-executivi.svg";
+import consultancyImage from "../assets/solutii/echipe-consultanta.svg";
+import companiesImage from "../assets/solutii/companii-proiecte-complexe.svg";
 
 type Cta = { label: string; href: string };
 type Image = { src: string; alt: string };
@@ -52,8 +53,8 @@ export const product = {
   /** Word set in bold inside `text`, as on the live page. */
   highlight: "performanță",
   image: {
-    src: collaborationImage,
-    alt: "Ilustrație: o echipă de proiect în fața unui perete de ecrane cu dashboard-uri, grafice și indicatori",
+    src: productImage,
+    alt: "Ilustrație: planul de activități al unui proiect în platforma eMIP, cu membrii echipei, progresul, orele și bugetul",
   } satisfies Image,
 };
 
@@ -84,7 +85,7 @@ export const personas: Persona[] = [
     ],
     image: {
       src: managersImage,
-      alt: "Ilustrație: monitor cu dashboard de proiect, grafice de progres și indicatori KPI",
+      alt: "Ilustrație: tabloul de bord al proiectului cu indicatori, progres, pontaje validate și buget, o alertă de depășire și un raport MIPE generat cu un click",
     },
   },
   {
@@ -104,11 +105,11 @@ export const personas: Persona[] = [
       "Rapoarte executive cu un singur click",
       "Vizualizare securizată portofoliu complet de proiecte",
       "Alertă timpurie pentru riscuri și devieri",
-      "Audit trail complet pentru conformitate",
+      "Pistă de audit completă pentru conformitate",
     ],
     image: {
       src: directorsImage,
-      alt: "Ilustrație: scut de securitate înconjurat de dosare protejate și certificări ISO",
+      alt: "Ilustrație: portofoliul de proiecte cu starea fiecăruia, un grafic al portofoliului, un raport executiv securizat și o alertă de risc",
     },
   },
   {
@@ -132,7 +133,7 @@ export const personas: Persona[] = [
     ],
     image: {
       src: consultancyImage,
-      alt: "Ilustrație: dosare de documente organizate și protejate, conectate la cloud",
+      alt: "Ilustrație: spații separate și securizate pentru fiecare client, aceiași experți pe mai multe proiecte, un șablon de raport și o factură pe baza orelor lucrate",
     },
   },
   {
@@ -156,7 +157,7 @@ export const personas: Persona[] = [
     ],
     image: {
       src: companiesImage,
-      alt: "Ilustrație: roți dințate și fluxuri de date conectate într-un sistem automatizat",
+      alt: "Ilustrație: echipa cu roluri diferite, bugetul pe categorii și fișierele proiectului arhivate automat, cu opis și conformitate MIPE",
     },
   },
 ];

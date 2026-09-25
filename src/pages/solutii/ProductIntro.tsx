@@ -32,8 +32,8 @@ export function ProductIntro() {
           <img
             src={product.image.src}
             alt={product.image.alt}
-            width={1600}
-            height={893}
+            width={800}
+            height={450}
             className="aspect-[16/9] w-full rounded-3xl object-cover shadow-xl shadow-navy-900/10"
           />
         </div>

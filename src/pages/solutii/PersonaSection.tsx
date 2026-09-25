@@ -15,18 +15,21 @@ export function PersonaSection({ persona, tone, imageRight }: Props) {
   return (
     <Section id={id} tone={tone}>
       <div className="grid gap-10 lg:grid-cols-2 lg:gap-14 xl:gap-16">
+        {/* As tall as the section on large screens. The 4:3 drawing has no background of its own:
+            the box carries it (illustration-bg), so the drawing is shown whole in the middle of a
+            box of any height instead of being cropped at the sides. */}
         <div
-          className={`relative overflow-hidden rounded-3xl bg-navy-900 shadow-xl shadow-navy-900/10 lg:min-h-[28rem] ${
+          className={`illustration-bg relative aspect-[4/3] overflow-hidden rounded-3xl shadow-xl shadow-navy-900/10 lg:aspect-auto lg:min-h-[28rem] ${
             imageRight ? "lg:order-last" : ""
           }`}
         >
           <img
             src={image.src}
             alt={image.alt}
-            width={1600}
-            height={893}
+            width={800}
+            height={600}
             loading="lazy"
-            className="aspect-[16/9] w-full object-cover lg:absolute lg:inset-0 lg:aspect-auto lg:h-full"
+            className="absolute inset-0 size-full object-contain"
           />
         </div>
 

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link, useSearchParams } from "react-router";
 import { FileText, Search } from "lucide-react";
-import { footerNav, legalNav, mainNav } from "../../content/site";
+import { footerNav, legalNav, mainNav, unlistedPages } from "../../content/site";
 import { fetchPosts, postPath, type PostSummary } from "../../lib/blog";
 import { foldSlug, formatDate } from "../../lib/text";
 import { PageHeader } from "../../components/ui/PageHeader";
@@ -12,7 +12,7 @@ import { Section } from "../../components/ui/Section";
 
 const normalize = (s: string) => foldSlug(s).replace(/-/g, " ");
 
-const sitePages = [...new Map([...mainNav, ...footerNav, ...legalNav].map((p) => [p.href, p])).values()];
+const sitePages = [...new Map([...mainNav, ...footerNav, ...unlistedPages, ...legalNav].map((p) => [p.href, p])).values()];
 
 export function SearchPage() {
   const [params, setParams] = useSearchParams();

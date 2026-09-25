@@ -4,11 +4,11 @@ import {
   BellRing,
   BotMessageSquare,
   Briefcase,
+  Building,
   Calculator,
   ClipboardCheck,
   DatabaseBackup,
   Eye,
-  Factory,
   FileChartColumn,
   FolderKanban,
   Gauge,
@@ -74,7 +74,7 @@ export const benefits = {
     {
       icon: ShieldCheck,
       title: "Conformitate și Control",
-      text: "Raportare automată conform cerințelor MIPE. Audit trail complet și semnare electronică validă legal.",
+      text: "Raportare automată conform cerințelor MIPE. Pistă de audit completă și semnare electronică validă legal.",
     },
     {
       icon: Gauge,
@@ -158,7 +158,7 @@ export const features = {
     {
       icon: Library,
       title: "Librărie de Documente",
-      text: "Stocare centralizată cu versioning, permisiuni și căutare full-text.",
+      text: "Stocare centralizată cu versionare, permisiuni și căutare full-text.",
     },
     {
       icon: Calculator,
@@ -271,7 +271,7 @@ export const fundedProjects = {
       metric: "AI",
       metricLabel: "powered",
       title: "Asistent AI Inteligent",
-      text: "Funcționalitate GPT pentru interogare prin NLP și căutare inteligentă în conținutul documentelor.",
+      text: "Funcționalitate GPT pentru interogare prin NLP (limbaj natural) și căutare inteligentă în conținutul documentelor.",
     },
     {
       metric: ">50%",
@@ -340,9 +340,9 @@ export const useCases = {
       text: "Gestionați simultan mai multe proiecte pentru clienți diferiți. Rapoarte personalizate per client.",
     },
     {
-      icon: Factory,
+      icon: Building, // the same building as in the hero illustration
       title: "Companii",
-      text: "Proiecte și planuri de afaceri finanțate din fonduri europene. Tracking progres tehnic și monitorizarea încadrării în buget.",
+      text: "Proiecte și planuri de afaceri finanțate din fonduri europene. Urmărirea progresului tehnic și monitorizarea încadrării în buget.",
     },
     {
       icon: HeartHandshake,
@@ -352,7 +352,7 @@ export const useCases = {
     {
       icon: Landmark,
       title: "Instituții Publice",
-      text: "Conformitate garantată cu legislația. Audit trail complet și transparență.",
+      text: "Conformitate garantată cu legislația. Pistă de audit completă și transparență.",
     },
   ] satisfies IconCard[],
 };

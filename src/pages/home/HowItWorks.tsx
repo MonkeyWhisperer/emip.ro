@@ -28,7 +28,7 @@ export function HowItWorks() {
           {howItWorks.cta.label}
         </ButtonLink>
         <p className="flex max-w-xl gap-2 text-left text-sm text-slate-500">
-          <Info aria-hidden className="mt-0.5 size-4 shrink-0" />
+          <Info aria-hidden className="mt-1 size-4 shrink-0" />
           {howItWorks.note}
         </p>
       </div>

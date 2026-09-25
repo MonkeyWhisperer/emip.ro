@@ -169,6 +169,16 @@
   }
 }
 
+/* Backdrop of the drawn illustrations (Soluții sections): the navy gradient, dot grid and mint glow
+   their SVGs used to carry, set on the box instead, so a box of any height (e.g. as tall as its
+   section) is filled while the drawing itself is shown whole (object-contain), never cropped. */
+@utility illustration-bg {
+  background:
+    radial-gradient(circle at 50% 50%, rgb(52 211 153 / 0.2), rgb(52 211 153 / 0) 60%),
+    radial-gradient(circle, rgb(174 200 234 / 0.12) 1.2px, transparent 1.4px) 0 0 / 24px 24px,
+    linear-gradient(to bottom right, var(--color-navy-800), var(--color-navy-950));
+}
+
 /* Horizontal scroll hint (wide Markdown tables): a soft shadow on each edge that still hides
    content. The white covers scroll with the content and hide a shadow once its edge is reached. */
 @utility scroll-shadows-x {
