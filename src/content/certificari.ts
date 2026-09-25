@@ -1,4 +1,4 @@
-// The team's personal certifications (/certificari and the "Echipă certificată" line on the home
+// The team's personal certifications (/certificari and the "Certificările echipei" line on the home
 // page). The holders agreed to them being listed; no names are shown. Data and documents come from
 // the Vazduh site's certifications page (the PDFs are copies in public/docs/certificari/); the
 // Microsoft list, names and dates follow the Microsoft Learn transcript
@@ -23,7 +23,7 @@ export type Certification = {
   expires?: string;
   /** The certificate itself: the issuer's verification page or a PDF. */
   href?: string;
-  /** Label on the home page's "Echipă certificată" line; only certifications with one appear there. */
+  /** Label on the home page's "Certificările echipei" line; only certifications with one appear there. */
   line?: string;
   /** A Microsoft Applied Skill: counted apart from the certifications. */
   appliedSkill?: true;
@@ -203,7 +203,7 @@ export const issuers: Issuer[] = [
 
 /** The home page's summary line (components/ui/TeamCertifications) and the contact page's link. */
 export const highlight = {
-  label: "Echipă certificată",
+  label: "Certificările echipei",
   more: { label: "Toate certificările", href: "/certificari" },
   /** "Vezi cele 70 de certificări ale echipei" (the contact page's team card). */
   teamLink: (n: number) => (n === 1 ? "Vezi certificarea echipei" : `Vezi cele ${certificari(n)} ale echipei`),
