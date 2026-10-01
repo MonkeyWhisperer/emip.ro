@@ -181,20 +181,27 @@ export function LegalDocument({ doc, source }: Props) {
   return (
     <>
       <PageMeta title={doc.meta.title} description={doc.meta.description} />
-      <PageHeader eyebrow={legalLabels.eyebrow} title={doc.title} text={doc.text}>
-        <ul className="flex flex-wrap gap-2" aria-label={legalLabels.facts}>
-          {facts.map(({ icon: Icon, label, value }) => (
-            <li
-              key={value}
-              className="inline-flex items-center gap-2 rounded-full bg-white/10 px-3.5 py-1.5 text-sm font-medium text-white"
-            >
-              <Icon aria-hidden className="size-4 shrink-0 text-brand-400" />
-              {label && <span className="text-slate-300">{label}:</span>}
-              {value}
-            </li>
-          ))}
-        </ul>
-      </PageHeader>
+      {/* The facts span the header's full width (`wide`), so they stay on one row on large screens
+          instead of wrapping inside the text's column. */}
+      <PageHeader
+        eyebrow={legalLabels.eyebrow}
+        title={doc.title}
+        text={doc.text}
+        wide={
+          <ul className="flex flex-wrap gap-2" aria-label={legalLabels.facts}>
+            {facts.map(({ icon: Icon, label, value }) => (
+              <li
+                key={value}
+                className="inline-flex items-center gap-2 rounded-full bg-white/10 px-3.5 py-1.5 text-sm font-medium text-white"
+              >
+                <Icon aria-hidden className="size-4 shrink-0 text-brand-400" />
+                {label && <span className="text-slate-300">{label}:</span>}
+                {value}
+              </li>
+            ))}
+          </ul>
+        }
+      />
 
       <div className="bg-white">
         <Container className="py-12 sm:py-16 lg:grid lg:grid-cols-[15rem_minmax(0,48rem)] lg:justify-center lg:gap-12 xl:gap-20">

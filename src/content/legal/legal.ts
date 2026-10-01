@@ -39,8 +39,8 @@ export const termeni: LegalDoc = {
     description:
       "Termeni și condiții eMIP®: reguli de utilizare, drepturi și obligații, licențiere și tarife, confidențialitate, securitate (GDPR/ISO), retenția datelor și modalități de contact pentru suport și solicitări.",
   },
-  version: "3.0",
-  updated: "Februarie 2026",
+  version: "3.1",
+  updated: "Septembrie 2026",
 };
 
 export const confidentialitate: LegalDoc = {
@@ -54,8 +54,8 @@ export const confidentialitate: LegalDoc = {
     description:
       "Politica de confidențialitate eMIP®: ce date colectăm, temeiul legal, perioadele de retenție, drepturile dumneavoastră conform GDPR, transferurile internaționale, cookie-urile și datele de contact pentru protecția datelor.",
   },
-  version: "3.0",
-  updated: "Februarie 2026",
+  version: "3.1",
+  updated: "Septembrie 2026",
   compliance: "Conform GDPR (Regulamentul UE 2016/679)",
 };
 
@@ -73,8 +73,8 @@ export const cookies: LegalDoc = {
     description:
       "Politica eMIP® privind cookie-urile: ce sunt cookie-urile, tipurile de cookie-uri utilizate și cum le puteți gestiona.",
   },
-  version: "3.0",
-  updated: "Februarie 2026",
+  version: "3.1",
+  updated: "Septembrie 2026",
   compliance: "Conform GDPR (Regulamentul UE 2016/679)",
   notice:
     "Textul de mai jos reproduce Capitolul 5, „Cookie-uri și tehnologii similare”, din [Politica de Confidențialitate](/politica-de-confidentialitate) a Platformei eMIP®.",

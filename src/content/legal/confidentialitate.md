@@ -2,9 +2,9 @@
 
 Această Politică de Confidențialitate explică modul în care colectăm, utilizăm, stocăm și protejăm datele dumneavoastră cu caracter personal în contextul utilizării platformei eMIP ([www.emip.ro](/) și subdomeniile acesteia: pro.emip.ro, arch.emip.ro și alte subdomenii \*.emip.ro).
 
-Platforma eMIP este operată de: EMIP SRL, CUI: 43397967, Sediu: Alba Iulia, str. Tudor Arghezi nr. 6, jud. Alba, România
+Platforma eMIP este operată de: EMIP SRL, CUI: 43397967, Sediu: Alba Iulia, str. Tudor Arghezi nr. 6, cod poștal 510219, jud. Alba, România
 
-În prezenta Politică, „noi”, „al nostru” sau „Furnizorul” se referă la EMIP SRL, în calitate de operatori conjuncți ai platformei eMIP.
+În prezenta Politică, „noi”, „al nostru” sau „Furnizorul” se referă la EMIP SRL. Pentru datele colectate prin site-ul de prezentare [www.emip.ro](/) (formularul de contact, abonarea la newsletter, asistentul virtual), EMIP SRL este operator de date (secțiunea 1.7). Pentru datele încărcate de Beneficiari în aplicația eMIP (pro.emip.ro, arch.emip.ro), EMIP SRL acționează ca persoană împuternicită (secțiunea 1.3).
 
 Respectăm dreptul dumneavoastră la confidențialitate și ne angajăm să protejăm datele dumneavoastră cu caracter personal în conformitate cu Regulamentul (UE) 2016/679 (GDPR), Legea nr. 190/2018 privind protecția datelor și legislația aplicabilă din România.
 
@@ -17,8 +17,8 @@ Respectăm dreptul dumneavoastră la confidențialitate și ne angajăm să prot
 Acestea sunt informațiile pe care ni le oferiți în mod voluntar atunci când:
 
 - Vă creați un cont de utilizator pe platformă
-- Completați formulare pe site-ul nostru
-- Ne contactați prin email, telefon sau chat
+- Completați formularul de contact sau vă abonați la newsletter pe site-ul [www.emip.ro](/) (secțiunea 1.7)
+- Ne contactați prin email sau telefon ori scrieți asistentului virtual de pe site (secțiunea 1.7)
 - Încărcați documente pe platformă
 - Utilizați funcționalitățile platformei (calendare, rapoarte, arhive)
 
@@ -45,7 +45,7 @@ Categorii de date colectate direct:
 
 ### 1.2. Date colectate automat
 
-Atunci când accesați și utilizați platforma eMIP, colectăm automat anumite informații despre dispozitivul și comportamentul dumneavoastră online, în scopul asigurării funcționalității platformei, securității și îmbunătățirii serviciilor.
+Atunci când accesați și utilizați aplicația eMIP (pro.emip.ro, arch.emip.ro), colectăm automat anumite informații despre dispozitivul și comportamentul dumneavoastră online, în scopul asigurării funcționalității platformei, securității și îmbunătățirii serviciilor.
 
 Categorii de date colectate automat:
 
@@ -102,7 +102,7 @@ Platforma eMIP utilizează tehnologii automate pentru procesarea documentelor î
 
 ### 1.5. Date colectate prin alte mijloace de comunicare
 
-Dacă ne contactați prin email, telefon, chat live sau alte canale de comunicare, colectăm și stocăm:
+Dacă ne contactați prin email, telefon sau alte canale de comunicare, colectăm și stocăm:
 
 - Mesajele transmise prin chat sau email
 - Înregistrările convorbirilor telefonice (DOAR cu notificarea prealabilă a utilizatorului și consimțământul acestuia)
@@ -123,8 +123,38 @@ Conform Art. 5 din GDPR, respectăm următoarele principii:
 2. **Limitarea scopului:** Datele sunt colectate doar pentru scopuri determinate, explicite și legitime: furnizarea serviciilor platformei eMIP, gestionarea proiectelor europene, raportare către autorități, respectarea obligațiilor legale.
 3. **Minimizarea datelor:** Colectăm doar datele strict necesare pentru scopurile declarate. Nu cerem date excesive sau irelevante.
 4. **Exactitatea:** Ne asigurăm că datele sunt corecte și actualizate. Oferim utilizatorilor instrumente pentru actualizarea propriilor date.
-5. **Limitarea stocării:** Datele sunt păstrate doar pe perioada necesară (conform Politicii de Retenție detaliată în Capitolul 6).
-6. **Integritate și confidențialitate:** Datele sunt protejate prin măsuri tehnice și organizatorice adecvate (detaliate în Capitolul 5).
+5. **Limitarea stocării:** Datele sunt păstrate doar pe perioada necesară (conform Politicii de Retenție detaliată în Capitolul 2).
+6. **Integritate și confidențialitate:** Datele sunt protejate prin măsuri tehnice și organizatorice adecvate (detaliate în [Termenii și Condițiile de utilizare](/termeni-si-conditii-legale), Capitolul 1).
+
+### 1.7. Date prelucrate prin site-ul de prezentare www.emip.ro
+
+Site-ul de prezentare [www.emip.ro](/) (paginile publice, blogul, formularele și asistentul virtual) este administrat de EMIP SRL, în calitate de operator de date. Aplicația eMIP (pro.emip.ro, arch.emip.ro) este un sistem separat, descris în secțiunile 1.1–1.5.
+
+1. **Formularul de contact** ([www.emip.ro/contact](/contact))
+   - **Date colectate:** Prenume și nume, adresă de email, număr de telefon și numele companiei (opționale), subiectul și mesajul
+   - **Scop:** Să vă răspundem la solicitare și, după caz, să vă transmitem o ofertă sau să programăm o prezentare
+   - **Temei legal GDPR:** Art. 6(1)(a) - Consimțământ (bifarea căsuței din formular); Art. 6(1)(b) - Demersuri premergătoare încheierii unui contract, la cererea dumneavoastră
+   - **Stocare:** Mesajele sunt păstrate în baza de date a site-ului și pot fi citite doar de administratorul site-ului. Nu stocăm adresa IP și nici informații despre browser.
+2. **Abonarea la newsletter** (pagina principală)
+   - **Date colectate:** Adresa de email și data abonării
+   - **Scop:** Transmiterea de noutăți despre platforma eMIP, articole și evenimente
+   - **Temei legal GDPR:** Art. 6(1)(a) - Consimțământ (bifarea căsuței „Vreau să mă abonez la lista de corespondență eMIP.”)
+   - **Dezabonare:** Oricând, printr-un email la office@emip.ro sau printr-un mesaj trimis prin [formularul de contact](/contact). Adresa dumneavoastră este apoi ștearsă din listă.
+3. **Asistentul virtual** (butonul „Întrebați asistentul”)
+   - **Ce este:** Un asistent automat, bazat pe inteligență artificială, care răspunde la întrebări despre platformă, prețuri și servicii pe baza conținutului publicat pe site. Nu discutați cu un operator uman, iar răspunsurile generate automat pot conține erori.
+   - **Date prelucrate:** Mesajele pe care le scrieți, ultimele mesaje din conversație (pentru context) și adresa paginii de pe care scrieți. Nu transmitem furnizorului adresa IP sau alte date de identificare.
+   - **Furnizor:** OpenAI, care generează răspunsurile. Conform politicilor OpenAI pentru serviciile API, datele transmise nu sunt folosite pentru antrenarea modelelor și pot fi păstrate de OpenAI cel mult 30 de zile, pentru prevenirea abuzurilor (detalii despre transfer în Capitolul 4).
+   - **Jurnalul conversațiilor:** Păstrăm întrebările și răspunsurile, pagina și un identificator aleatoriu al conversației (fără adresă IP, nume sau alte date de identificare) timp de 90 de zile, după care se șterg automat. Jurnalul poate fi consultat doar de administratorul site-ului, pentru îmbunătățirea răspunsurilor și prevenirea abuzurilor.
+   - **Temei legal GDPR:** Art. 6(1)(f) - Interes legitim (a răspunde întrebărilor vizitatorilor și a îmbunătăți informațiile de pe site)
+   - **Recomandare:** Nu introduceți în conversație date cu caracter personal (de exemplu CNP, date de sănătate sau date ale altor persoane). Pentru solicitări care vă privesc personal, folosiți [formularul de contact](/contact).
+4. **Date tehnice și securitate**
+   - **Detalii:** Pentru protecția împotriva abuzurilor (trimiterea automată a formularelor, suprasolicitarea asistentului, încercări repetate de autentificare), adresa IP este folosită temporar, doar în memoria serverului, pentru limitarea numărului de cereri. Nu este salvată în baza de date sau în jurnalele aplicației și este eliminată după cel mult 24 de ore.
+   - **Temei legal GDPR:** Art. 6(1)(f) - Interes legitim (securitatea site-ului)
+   - **Găzduire:** Site-ul și baza sa de date (mesajele din formularul de contact, abonările la newsletter și jurnalul asistentului) sunt găzduite de Railway (Railway Corporation), care poate păstra propriile jurnale tehnice ale cererilor, conform politicilor sale.
+5. **Conținut de la terți**
+   - Unele articole de blog includ videoclipuri YouTube, încărcate în modul de confidențialitate sporită (youtube-nocookie.com), și videoclipuri găzduite de Wix (video.wixstatic.com). Când deschideți aceste articole, browserul dumneavoastră se conectează la serverele Google/YouTube, respectiv Wix, care primesc adresa IP și informații tehnice despre browser, conform politicilor proprii.
+   - Butoanele de distribuire pe LinkedIn și Facebook și linkul către Google Maps sunt simple linkuri: nu transmit date acestor servicii decât dacă le accesați.
+6. **Fără instrumente de analiză sau publicitate:** Site-ul [www.emip.ro](/) nu folosește Google Analytics, pixeli de urmărire sau alte instrumente de analiză ori de publicitate și nu plasează cookie-uri pentru vizitatori (Capitolul 5).
 
 ## 2. PERIOADA DE RETENȚIE A DATELOR
 
@@ -163,6 +193,18 @@ Conform Art. 5(1)(e) din GDPR (principiul limitării stocării), păstrăm datel
    - **Perioada de retenție:** Până la retragerea consimțământului sau 3 ani de inactivitate
    - **Justificare legală:** Art. 6(1)(a) - Consimțământ
    - **După expirare:** Ștergere imediată la cerere sau după inactivitate
+8. **Categorie date:** Mesaje trimise prin formularul de contact de pe [www.emip.ro](/contact)
+   - **Perioada de retenție:** Cât este necesar pentru a răspunde solicitării și pentru relația ulterioară, dar nu mai mult de 2 ani de la ultima interacțiune
+   - **Justificare legală:** Art. 6(1)(a) - Consimțământ; Art. 6(1)(b) - Demersuri precontractuale
+   - **După expirare:** Ștergere de către administratorul site-ului sau la cerere
+9. **Categorie date:** Jurnalul asistentului virtual de pe [www.emip.ro](/)
+   - **Perioada de retenție:** 90 de zile
+   - **Justificare legală:** Art. 6(1)(f) - Interes legitim
+   - **După expirare:** Ștergere automată după 90 de zile
+10. **Categorie date:** Adrese IP folosite pentru limitarea cererilor pe [www.emip.ro](/)
+    - **Perioada de retenție:** Cel mult 24 de ore, doar în memoria serverului
+    - **Justificare legală:** Art. 6(1)(f) - Interes legitim (securitate)
+    - **După expirare:** Eliminare automată
 
 ### 2.2. Mecanismul de retenție pentru proiecte
 
@@ -268,7 +310,7 @@ Procedura de ștergere anticipată:
    - **Descriere:** Puteți să vă opuneți prelucrării datelor bazate pe interes legitim [Art. 6(1)(f)] sau pe sarcină de interes public.\
      Pentru marketing direct: opoziție ABSOLUTĂ (nu avem cum să continuăm)
    - **Cum se exercită:** Cerere scrisă motivată\
-     Pentru marketing: click pe „Unsubscribe” în email
+     Pentru newsletter: cerere de dezabonare la office@emip.ro (secțiunea 1.7)
    - **Termen răspuns:** 1 lună
 
    Putem continua prelucrarea DOAR dacă demonstrăm motive legitime imperative care prevalează asupra drepturilor dvs.
@@ -311,11 +353,17 @@ Conform Art. 44-50 din GDPR, transferurile de date cu caracter personal către �
 
 **Prioritatea noastră: PĂSTRAREA DATELOR ÎN UNIUNEA EUROPEANĂ**
 
-În mod implicit, toate datele dumneavoastră sunt stocate și procesate în Centre de Date Microsoft Azure situate geografic în Uniunea Europeană (Olanda, Irlanda, Germania, Franța). Nu realizăm transferuri către țări din afara UE/SEE, cu următoarele excepții limitate:
+**Aplicația eMIP (pro.emip.ro, arch.emip.ro):** În mod implicit, datele sunt stocate și procesate în Centre de Date Microsoft Azure situate geografic în Uniunea Europeană (Olanda, Irlanda, Germania, Franța). Nu realizăm transferuri către țări din afara UE/SEE, cu următoarele excepții limitate:
 
 - **Microsoft Corporation (SUA):** Infrastructura Microsoft Azure poate implica suport tehnic de nivel 3 din SUA în cazuri excepționale. Microsoft are Clauzele Contractuale Standard (SCC) aprobate de Comisia Europeană și respectă mecanismul EU-US Data Privacy Framework.
 - **Twilio (SUA):** Pentru SMS-uri de autentificare MFA. Twilio are SCC și certificări GDPR. Datele transmise sunt minimale (doar număr telefon + cod de verificare).
 - **Google Analytics (SUA):** Doar dacă ați consimțit la cookie-uri de analiză. Google are SCC și măsuri suplimentare de protecție. Datele sunt anonimizate în măsura posibilului.
+
+**Site-ul de prezentare www.emip.ro:** Prelucrările descrise în secțiunea 1.7 implică următorii furnizori din afara UE/SEE:
+
+- **OpenAI (SUA):** Mesajele trimise asistentului virtual sunt procesate de OpenAI pentru generarea răspunsurilor. Nu transmitem adresa IP sau alte date de identificare, iar conținutul publicat pe site (pagini, articole de blog) este indexat la OpenAI pentru ca asistentul să îl poată consulta.
+- **Railway (SUA):** Furnizorul de găzduire al site-ului și al bazei sale de date (mesajele din formularul de contact, abonările la newsletter și jurnalul asistentului).
+- **Google/YouTube (SUA) și Wix (Israel):** Doar atunci când deschideți un articol de blog care include videoclipuri găzduite de aceste servicii (secțiunea 1.7).
 
 ### 4.2. Garanții pentru transferuri internaționale
 
@@ -324,7 +372,7 @@ Pentru orice transfer de date către țări din afara UE/SEE, ne asigurăm că s
 - Clauzele Contractuale Standard (SCC) – aprobate de Comisia Europeană conform Art. 46(2)(c) GDPR
 - EU-US Data Privacy Framework – pentru companii americane certificate (ex. Microsoft)
 - Evaluarea riscurilor de transfer (Transfer Impact Assessment - TIA) conform recomandărilor CJUE (hotărârea Schrems II)
-- Măsuri tehnice suplimentare: criptare end-to-end, pseudonimizare, minimizarea datelor transferate
+- Măsuri tehnice suplimentare: criptarea datelor în tranzit (TLS), pseudonimizare, minimizarea datelor transferate
 - Acorduri de Prelucrare Date (DPA) cu toți subcontractanții internaționali
 - Dreptul dumneavoastră de a solicita informații detaliate despre transferuri (Art. 15 GDPR)
 
@@ -332,13 +380,29 @@ Pentru orice transfer de date către țări din afara UE/SEE, ne asigurăm că s
 
 ## 5. COOKIE-URI ȘI TEHNOLOGII SIMILARE
 
-Platforma eMIP utilizează cookie-uri și tehnologii similare pentru a asigura funcționarea corectă, pentru securitate și pentru îmbunătățirea experienței utilizatorului. Această secțiune oferă informații sumare. Pentru detalii complete, consultați Politica privind Cookie-urile disponibilă la: [www.emip.ro/politica-cookies](/politica-cookies)
+Această secțiune descrie cookie-urile și tehnologiile similare folosite de site-ul de prezentare [www.emip.ro](/) și de aplicația eMIP. Ea este publicată și separat, ca Politica privind cookie-urile, la: [www.emip.ro/politica-cookies](/politica-cookies)
 
 ### 5.1. Ce sunt cookie-urile?
 
-Cookie-urile sunt fișiere text mici stocate pe dispozitivul dumneavoastră de către site-urile web pe care le vizitați. Ele permit site-ului să vă recunoască și să rețină preferințele dumneavoastră.
+Cookie-urile sunt fișiere text mici stocate pe dispozitivul dumneavoastră de către site-urile web pe care le vizitați. Ele permit site-ului să vă recunoască și să rețină preferințele dumneavoastră. Tehnologiile similare includ stocarea de sesiune a browserului (sessionStorage), care păstrează informații doar până la închiderea filei.
 
-### 5.2. Tipuri de cookie-uri utilizate
+### 5.2. Site-ul de prezentare www.emip.ro
+
+Site-ul [www.emip.ro](/) nu plasează cookie-uri pentru vizitatori și nu folosește cookie-uri de analiză, de marketing sau de urmărire. De aceea, nu afișează un banner de consimțământ. Folosește doar următoarele elemente strict necesare, care nu necesită consimțământ (Art. 5(3) ePrivacy Directive - exceptate):
+
+1. **Denumire:** emip-chat (stocare de sesiune)
+   - **Scop:** Păstrează conversația cu asistentul virtual și un identificator aleatoriu al conversației cât timp navigați pe site. Se creează doar după ce deschideți asistentul.
+   - **Durată:** Până la închiderea filei
+2. **Denumire:** react-router-scroll-positions (stocare de sesiune)
+   - **Scop:** Reține poziția de derulare a paginilor vizitate, pentru revenirea la același loc când navigați înapoi
+   - **Durată:** Până la închiderea filei
+3. **Denumire:** emip_admin (cookie)
+   - **Scop:** Sesiunea de autentificare a administratorului site-ului. Nu este plasat vizitatorilor.
+   - **Durată:** 7 zile sau până la deconectare
+
+**Conținut de la terți:** Articolele de blog care includ videoclipuri YouTube (încărcate prin youtube-nocookie.com) sau videoclipuri găzduite de Wix se conectează la serverele acestor servicii. YouTube poate stoca informații pe dispozitivul dumneavoastră atunci când redați un videoclip, conform politicilor Google.
+
+### 5.3. Aplicația eMIP (pro.emip.ro, arch.emip.ro)
 
 1. **Tip cookie:** Cookie-uri strict necesare
    - **Scop:** Autentificare, sesiune utilizator, securitate, funcționalități de bază ale platformei
@@ -361,14 +425,14 @@ Cookie-urile sunt fișiere text mici stocate pe dispozitivul dumneavoastră de c
    - **Necesită consimțământ?:** DA (necesită consimțământ explicit)
    - **Durată:** Variabilă
 
-### 5.3. Gestionarea cookie-urilor
+### 5.4. Gestionarea cookie-urilor
 
 Puteți gestiona cookie-urile în următoarele moduri:
 
-- **Banner de consimțământ** – La prima vizită pe site, vi se va afișa un banner care vă permite să acceptați sau să refuzați cookie-urile de analiză și marketing
+- **Banner de consimțământ** – În aplicația eMIP, dacă sunt folosite cookie-uri de analiză sau de marketing, vi se afișează la prima accesare un banner care vă permite să le acceptați sau să le refuzați
 - **Setări browser** – Puteți configura browserul să blocheze toate cookie-urile sau să vă solicite consimțământul pentru fiecare cookie
-- **Ștergere cookie-uri** – Puteți șterge oricând cookie-urile existente din browserul dumneavoastră
-- **Retragere consimțământ** – Puteți reveni oricând asupra deciziei accesând setările de cookie pe site
+- **Ștergere cookie-uri** – Puteți șterge oricând cookie-urile și datele stocate de site-uri din browserul dumneavoastră
+- **Retragere consimțământ** – Puteți reveni oricând asupra deciziei din setările de cookie ale aplicației
 
 > **ATENȚIE:** Dezactivarea cookie-urilor strict necesare poate afecta funcționarea platformei eMIP (ex. nu vă veți putea autentifica).
 
@@ -405,7 +469,7 @@ Ne rezervăm dreptul de a modifica periodic această Politică de Confidențiali
 - Pentru modificări MINORE (clarificări, corecții): publicăm direct noua versiune, iar continuarea utilizării platformei reprezintă acceptarea tacită
 - Păstrăm un istoric al versiunilor anterioare disponibil la cerere
 
-**Dreptul dumneavoastră:** Dacă nu sunteți de acord cu modificările aduse Politicii de Confidențialitate, puteți denunța unilateral Contractul de Licențiere conform Termenilor și Condițiilor (preaviz 15 zile) și puteți solicita ștergerea datelor dumneavoastră.
+**Dreptul dumneavoastră:** Dacă nu sunteți de acord cu modificările aduse Politicii de Confidențialitate, puteți solicita oricând ștergerea datelor dumneavoastră. Dacă sunteți Beneficiar al aplicației eMIP, puteți, de asemenea, denunța unilateral Contractul de Licențiere conform Termenilor și Condițiilor (preaviz 15 zile).
 
 ## 8. ÎNTREBĂRI ȘI CONTACTE
 
@@ -414,7 +478,7 @@ Pentru orice întrebări, solicitări sau reclamații referitoare la prelucrarea
 ### 8.1. Date de contact generale
 
 **EMIP SRL**\
-**Adresă:** Alba Iulia, str. Tudor Arghezi nr. 6, jud. Alba, România\
+**Adresă:** Alba Iulia, str. Tudor Arghezi nr. 6, cod poștal 510219, jud. Alba, România\
 **Email suport tehnic:** admin@emip.ro\
 **Email general:** office@emip.ro\
 **Telefon:** +40 745 128 387\
@@ -433,7 +497,7 @@ Pentru solicitări specifice GDPR (exercitarea drepturilor, plângeri, întrebă
 Puteți transmite cereri prin:
 
 - **Email:** admin@emip.ro sau data.protection@emip.ro (preferat pentru răspuns rapid)
-- **Poștă:** Alba Iulia, str. Tudor Arghezi nr. 6, jud. Alba, România (cu scrisoare recomandată pentru solicitări formale)
+- **Poștă:** Alba Iulia, str. Tudor Arghezi nr. 6, cod poștal 510219, jud. Alba, România (cu scrisoare recomandată pentru solicitări formale)
 - **Formular de contact:** [www.emip.ro/contact](/contact) (pentru întrebări generale)
 
 Ce să includeți în cerere:
@@ -468,9 +532,9 @@ Ne angajăm să:
 
 ***
 
-Data ultimei actualizări: Februarie 2026
+Data ultimei actualizări: Septembrie 2026
 
-Versiune: 3.0
+Versiune: 3.1
 
 Vă mulțumim pentru încrederea acordată platformei eMIP!
 

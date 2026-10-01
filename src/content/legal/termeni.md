@@ -1,6 +1,6 @@
 ## CAPITOLUL 1: INTRODUCERE
 
-Acești Termeni și Condiții de Utilizare (denumiți în continuare „Termeni și Condiții”) reglementează accesul și utilizarea **platformei online eMIP (Managementul Integrat al Proiectelor)**, dezvoltată și operată de **EMIP SRL (CUI: 43397967), având sediul în Alba Iulia, str. Tudor Arghezi nr. 6, jud. Alba, România.**
+Acești Termeni și Condiții de Utilizare (denumiți în continuare „Termeni și Condiții”) reglementează accesul și utilizarea **platformei online eMIP (Managementul Integrat al Proiectelor)**, dezvoltată și operată de **EMIP SRL (CUI: 43397967), având sediul în Alba Iulia, str. Tudor Arghezi nr. 6, cod poștal 510219, jud. Alba, România.**
 
 Platforma eMIP este un ecosistem integrat de soluții software dedicate gestionării proiectelor europene, oferind funcționalități avansate pentru managementul echipelor, arhivarea documentelor, generarea rapoartelor și procesarea automată a datelor. Ecosistemul include:
 
@@ -15,7 +15,7 @@ Prin accesarea și utilizarea oricărui subdomen al platformei eMIP, utilizatori
 
 Pentru o mai bună înțelegere a acestor Termeni și Condiții, următorii termeni vor avea semnificațiile specificate mai jos:
 
-**a) Platforma eMIP / Software** - Sistemul online dezvoltat de EMIP SRL, care rulează pe infrastructura tehnică proprie și Microsoft Azure (Centre de Date în Uniunea Europeană) și oferă funcționalități pentru gestionarea proiectelor europene, managementul documentelor, procesarea automată a datelor și generarea rapoartelor. Include toate subdomeniile \*.emip.ro.
+**a) Platforma eMIP / Software** - Sistemul online dezvoltat de EMIP SRL, care rulează pe infrastructura tehnică proprie și Microsoft Azure (Centre de Date în Uniunea Europeană) și oferă funcționalități pentru gestionarea proiectelor europene, managementul documentelor, procesarea automată a datelor și generarea rapoartelor. Include subdomeniile \*.emip.ro ale aplicației (ex. pro.emip.ro, arch.emip.ro). Site-ul de prezentare [www.emip.ro](/) este un sistem separat, găzduit de furnizorul Railway.
 
 **b) Furnizor:** EMIP SRL (CUI: 43397967), entitățile care administrează platforma eMIP și furnizează licențe de utilizare și servicii asociate.
 
@@ -104,7 +104,7 @@ Măsurile tehnice și organizatorice implementate includ:
 - Disaster Recovery prin Azure Site Recovery
 - Monitorizare continuă prin Microsoft Defender for Cloud
 - Log-uri de acces și pistă de audit pentru toate operațiunile sensibile
-- Stocarea datelor exclusiv în Centre de Date Microsoft Azure din Uniunea Europeană
+- Stocarea datelor încărcate în platformă exclusiv în Centre de Date Microsoft Azure din Uniunea Europeană
 
 ### 1.5. Principii Fundamentale Respectate de Platforma eMIP
 
@@ -136,7 +136,7 @@ Accesul la platforma eMIP și subdomeniile acesteia este condiționat de:
 
 Accesul la platformă se realizează prin:
 
-- Browser web (Chrome, Firefox, Edge, Safari) la adresele: [www.emip.ro](/), pro.emip.ro, arch.emip.ro
+- Browser web (Chrome, Firefox, Edge, Safari) la adresele: pro.emip.ro, arch.emip.ro (site-ul de prezentare [www.emip.ro](/) conține linkurile de acces)
 - Aplicații mobile dedicate (iOS, Android) – disponibile în App Store și Google Play, după caz
 - API-uri dedicate pentru integrări (la cerere și cu aprobarea Furnizorului)
 
@@ -178,6 +178,15 @@ Sistemul de licențiere al platformei eMIP funcționează pe principiul Licențe
 4. **Cloud Storage** – Tarifare separată pentru volumul de stocare utilizat suplimentar (Euro/GB/lună)
 5. **Servicii suplimentare** – Training personalizat, configurări custom, migrări de date (la cerere și cu tarif separat)
 6. **Prelungire automată** – Contractul se prelungește automat lunar, dacă nu este denunțat de una din părți cu 15 zile prealabil
+
+### 2.5. Asistentul Virtual de pe Site-ul www.emip.ro
+
+Site-ul de prezentare [www.emip.ro](/) pune la dispoziția vizitatorilor un asistent virtual („Asistentul eMIP”): un sistem automat, bazat pe inteligență artificială (servicii OpenAI), care răspunde la întrebări pe baza informațiilor publicate pe site. Conversația nu este purtată cu un operator uman.
+
+- Răspunsurile sunt generate automat, au caracter strict informativ și pot conține erori sau informații incomplete. Ele nu constituie ofertă comercială, consultanță juridică sau financiară și nu modifică prevederile Contractului de Licențiere, ale prezentelor Termeni și Condiții sau tarifele publicate.
+- Pentru informații cu caracter obligatoriu (tarife, condiții contractuale) sunt valabile documentele contractuale și paginile site-ului. Confirmarea echipei eMIP poate fi solicitată prin [formularul de contact](/contact).
+- Vizitatorii nu trebuie să introducă în conversație date cu caracter personal proprii sau ale altor persoane. Modul în care sunt prelucrate mesajele este descris în [Politica de Confidențialitate](/politica-de-confidentialitate), secțiunea 1.7.
+- Furnizorul poate limita sau suspenda accesul la asistent, inclusiv pentru a preveni utilizarea abuzivă.
 
 ## CAPITOLUL 3: REMUNERAȚIA, TARIFELE ȘI PLĂȚILE
 
@@ -239,7 +248,7 @@ Furnizorul își asumă următoarele responsabilități:
 - Disaster Recovery prin Azure Site Recovery
 - Monitorizare continuă prin Microsoft Defender for Cloud
 - Asistență tehnică în limba română, de luni până vineri, între orele 09:00-17:00
-- Păstrarea confidențialității datelor conform Clauza 10 privind Confidențialitatea
+- Păstrarea confidențialității datelor conform Capitolului 6 (Confidențialitate)
 - Implementarea măsurilor de securitate conform Art. 32 din GDPR și ISO 27001
 - Notificarea Beneficiarului în caz de incident de securitate (în maximum 72 ore)
 - Respectarea obligațiilor ca Persoană Împuternicită conform Art. 28 din GDPR
@@ -255,7 +264,7 @@ Furnizorul NU este responsabil pentru:
 - Pierderea de date cauzată de acțiunile utilizatorilor (ex. ștergerea voluntară, încărcarea de fișiere corupte)
 - Disfuncționalitățile cauzate de infrastructura IT a Beneficiarului (conexiune internet, terminale)
 - Atacuri cibernetice de tip Zero Day (pentru care nu există patch-uri de securitate disponibile)
-- Cazuri de forță majoră (conform Clauza 11)
+- Cazuri de forță majoră (conform Capitolului 7)
 - Prejudicii indirecte sau pierderi de profit ale Beneficiarului
 
 În cazul în care disponibilitatea platformei scade sub 98% dintr-o cauză imputabilă Furnizorului, Beneficiarul are dreptul la rambursarea proporțională a Remunerației pentru perioada în care platforma nu a fost disponibilă.
@@ -413,7 +422,7 @@ Partea care invocă Forța Majoră are următoarele obligații:
 
 În contextul platformei eMIP, sunt considerate Forță Majoră următoarele evenimente cibernetice:
 
-- Atacuri cibernetice de amploare anunțate oficial de CERT-RO (Centrul Național de Răspuns la Incidente de Securitate Cibernetică)
+- Atacuri cibernetice de amploare anunțate oficial de Directoratul Național de Securitate Cibernetică (DNSC, fostul CERT-RO)
 - Atacuri cibernetice bazate pe vulnerabilități Zero Day (pentru care producătorii de software nu au emis încă patch-uri)
 - Atacuri DDoS de magnitudine excepțională care depășesc capacitatea de apărare a infrastructurii Microsoft Azure
 - Atacuri inițiate prin rețeaua de date a Beneficiarului (considerate „rețele de încredere” din perspectiva filtrelor de securitate)
@@ -545,7 +554,7 @@ Prezentele Termeni și Condiții, împreună cu:
 
 - Contractul de Licențiere semnat între părți
 - Politica de Confidențialitate
-- Politica privind utilizarea Cookie-urilor (publicată pe [www.emip.ro](/))
+- Politica privind utilizarea Cookie-urilor (publicată la [www.emip.ro/politica-cookies](/politica-cookies))
 - Anexele la Contract (Tarife, Specificații Tehnice, Acord GDPR, etc.)
 
 constituie ÎNTREGUL ACORD între părți și înlocuiesc orice înțelegeri verbale sau scrise anterioare referitoare la utilizarea platformei eMIP.
@@ -562,7 +571,7 @@ Toate drepturile de proprietate intelectuală asupra platformei eMIP, inclusiv d
 - Interfața grafică și designul platformei
 - Algoritmii și structurile de date
 - Documentația tehnică
-- Mărcile comerciale eMIP, eMIP-Proiecte, eMIP-Plan Afaceri, eMIP-Arch, logo-urile
+- Mărcile comerciale eMIP®, eMIP® Proiecte, eMIP® Plan Afaceri, eMIP® Arch, logo-urile
 - Conținutul site-ului [www.emip.ro](/) și subdomeniilor
 
 aparțin în exclusivitate Furnizorului (EMIP SRL) și sunt protejate de legislația română și internațională privind drepturile de autor și proprietatea intelectuală.
@@ -585,7 +594,7 @@ Prin accesarea și utilizarea platformei eMIP, prin bifarea căsuței de accepta
 Pentru orice întrebări, solicitări sau reclamații referitoare la prezentele Termeni și Condiții sau la utilizarea platformei eMIP, vă rugăm să contactați:
 
 **EMIP SRL**\
-Adresa: Alba Iulia, str. Tudor Arghezi nr. 6, jud. Alba, România\
+Adresa: Alba Iulia, str. Tudor Arghezi nr. 6, cod poștal 510219, jud. Alba, România\
 Email Suport Tehnic: admin@emip.ro\
 Email General: office@emip.ro\
 Telefon: +40 745 128 387\
@@ -596,9 +605,9 @@ Pentru solicitări privind protecția datelor cu caracter personal (GDPR), conta
 
 ***
 
-Prezentele Termeni și Condiții au fost actualizate la data de: Februarie 2026
+Prezentele Termeni și Condiții au fost actualizate la data de: Septembrie 2026
 
-Versiune: 3.0
+Versiune: 3.1
 
 Vă mulțumim că utilizați platforma eMIP!
 
